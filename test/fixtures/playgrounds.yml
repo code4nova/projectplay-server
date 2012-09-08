@@ -1,0 +1,59 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  mapid: 1
+  agelevel: MyString
+  totplay: 1
+  openaccess: 1
+  invitation: 1
+  access: 1
+  safelocation: 1
+  conditions: 1
+  monitoring: 1
+  programming: 1
+  weather: 1
+  seating: 1
+  restrooms: 1
+  drinkingw: 1
+  physicald: 1
+  socialdom: 1
+  intellect: 1
+  naturualen: 1
+  freeunstruct: 1
+  specificcomments: MyText
+  generalcomments: MyText
+  compsum: 1
+  modsum: 1
+  graspvalue: 1
+  class: MyString
+  subarea: MyText
+
+two:
+  name: MyString
+  mapid: 1
+  agelevel: MyString
+  totplay: 1
+  openaccess: 1
+  invitation: 1
+  access: 1
+  safelocation: 1
+  conditions: 1
+  monitoring: 1
+  programming: 1
+  weather: 1
+  seating: 1
+  restrooms: 1
+  drinkingw: 1
+  physicald: 1
+  socialdom: 1
+  intellect: 1
+  naturualen: 1
+  freeunstruct: 1
+  specificcomments: MyText
+  generalcomments: MyText
+  compsum: 1
+  modsum: 1
+  graspvalue: 1
+  class: MyString
+  subarea: MyText

@@ -1,0 +1,125 @@
+<%= form_for(@playground) do |f| %>
+  <% if @playground.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@playground.errors.count, "error") %> prohibited this playground from being saved:</h2>
+
+      <ul>
+      <% @playground.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :mapid %><br />
+    <%= f.number_field :mapid %>
+  </div>
+  <div class="field">
+    <%= f.label :agelevel %><br />
+    <%= f.text_field :agelevel %>
+  </div>
+  <div class="field">
+    <%= f.label :totplay %><br />
+    <%= f.number_field :totplay %>
+  </div>
+  <div class="field">
+    <%= f.label :openaccess %><br />
+    <%= f.number_field :openaccess %>
+  </div>
+  <div class="field">
+    <%= f.label :invitation %><br />
+    <%= f.number_field :invitation %>
+  </div>
+  <div class="field">
+    <%= f.label :access %><br />
+    <%= f.number_field :access %>
+  </div>
+  <div class="field">
+    <%= f.label :safelocation %><br />
+    <%= f.number_field :safelocation %>
+  </div>
+  <div class="field">
+    <%= f.label :conditions %><br />
+    <%= f.number_field :conditions %>
+  </div>
+  <div class="field">
+    <%= f.label :monitoring %><br />
+    <%= f.number_field :monitoring %>
+  </div>
+  <div class="field">
+    <%= f.label :programming %><br />
+    <%= f.number_field :programming %>
+  </div>
+  <div class="field">
+    <%= f.label :weather %><br />
+    <%= f.number_field :weather %>
+  </div>
+  <div class="field">
+    <%= f.label :seating %><br />
+    <%= f.number_field :seating %>
+  </div>
+  <div class="field">
+    <%= f.label :restrooms %><br />
+    <%= f.number_field :restrooms %>
+  </div>
+  <div class="field">
+    <%= f.label :drinkingw %><br />
+    <%= f.number_field :drinkingw %>
+  </div>
+  <div class="field">
+    <%= f.label :physicald %><br />
+    <%= f.number_field :physicald %>
+  </div>
+  <div class="field">
+    <%= f.label :socialdom %><br />
+    <%= f.number_field :socialdom %>
+  </div>
+  <div class="field">
+    <%= f.label :intellect %><br />
+    <%= f.number_field :intellect %>
+  </div>
+  <div class="field">
+    <%= f.label :naturualen %><br />
+    <%= f.number_field :naturualen %>
+  </div>
+  <div class="field">
+    <%= f.label :freeunstruct %><br />
+    <%= f.number_field :freeunstruct %>
+  </div>
+  <div class="field">
+    <%= f.label :specificcomments %><br />
+    <%= f.text_area :specificcomments %>
+  </div>
+  <div class="field">
+    <%= f.label :generalcomments %><br />
+    <%= f.text_area :generalcomments %>
+  </div>
+  <div class="field">
+    <%= f.label :compsum %><br />
+    <%= f.number_field :compsum %>
+  </div>
+  <div class="field">
+    <%= f.label :modsum %><br />
+    <%= f.number_field :modsum %>
+  </div>
+  <div class="field">
+    <%= f.label :graspvalue %><br />
+    <%= f.number_field :graspvalue %>
+  </div>
+  <div class="field">
+    <%= f.label :class %><br />
+    <%= f.text_field :class %>
+  </div>
+  <div class="field">
+    <%= f.label :subarea %><br />
+    <%= f.text_area :subarea %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

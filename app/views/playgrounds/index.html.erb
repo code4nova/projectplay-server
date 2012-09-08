@@ -1,0 +1,75 @@
+<h1>Listing playgrounds</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Mapid</th>
+    <th>Agelevel</th>
+    <th>Totplay</th>
+    <th>Openaccess</th>
+    <th>Invitation</th>
+    <th>Access</th>
+    <th>Safelocation</th>
+    <th>Conditions</th>
+    <th>Monitoring</th>
+    <th>Programming</th>
+    <th>Weather</th>
+    <th>Seating</th>
+    <th>Restrooms</th>
+    <th>Drinkingw</th>
+    <th>Physicald</th>
+    <th>Socialdom</th>
+    <th>Intellect</th>
+    <th>Naturualen</th>
+    <th>Freeunstruct</th>
+    <th>Specificcomments</th>
+    <th>Generalcomments</th>
+    <th>Compsum</th>
+    <th>Modsum</th>
+    <th>Graspvalue</th>
+    <th>Class</th>
+    <th>Subarea</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @playgrounds.each do |playground| %>
+  <tr>
+    <td><%= playground.name %></td>
+    <td><%= playground.mapid %></td>
+    <td><%= playground.agelevel %></td>
+    <td><%= playground.totplay %></td>
+    <td><%= playground.openaccess %></td>
+    <td><%= playground.invitation %></td>
+    <td><%= playground.access %></td>
+    <td><%= playground.safelocation %></td>
+    <td><%= playground.conditions %></td>
+    <td><%= playground.monitoring %></td>
+    <td><%= playground.programming %></td>
+    <td><%= playground.weather %></td>
+    <td><%= playground.seating %></td>
+    <td><%= playground.restrooms %></td>
+    <td><%= playground.drinkingw %></td>
+    <td><%= playground.physicald %></td>
+    <td><%= playground.socialdom %></td>
+    <td><%= playground.intellect %></td>
+    <td><%= playground.naturualen %></td>
+    <td><%= playground.freeunstruct %></td>
+    <td><%= playground.specificcomments %></td>
+    <td><%= playground.generalcomments %></td>
+    <td><%= playground.compsum %></td>
+    <td><%= playground.modsum %></td>
+    <td><%= playground.graspvalue %></td>
+    <td><%= playground.class %></td>
+    <td><%= playground.subarea %></td>
+    <td><%= link_to 'Show', playground %></td>
+    <td><%= link_to 'Edit', edit_playground_path(playground) %></td>
+    <td><%= link_to 'Destroy', playground, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Playground', new_playground_path %>
