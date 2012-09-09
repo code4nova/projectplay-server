@@ -21,6 +21,6 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: projectplay_prod
+  database: dfej5dt2ej31mp
   pool: 5
-  username: 
+  username: nqdbgwtmlqulpc

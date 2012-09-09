@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
-
+gem 'fastercsv'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -16,7 +16,7 @@ group :production do
 end
 
 gem 'json'
-
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -46,3 +46,6 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 gem 'heroku'
+
+
+gem "devise"
