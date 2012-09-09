@@ -1,0 +1,90 @@
+LOCATION,MAP_ID,Age_Level,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,SPECIFIC_C,GENERAL_CO,0,0,0,CLASS,SUBAREA,lat,long
+Charles Houston Rec Center,900,,0,2,2,3,3,3,3,1,3,3,3,3,2,3,3,1,3,"for kids 2-5, $4 charge for 45 min per child",,12,26,312,INDOOR,SubArea Four,38.812974,-77.047821
+John Adams School,023,?,0,1,3,3,3,3,3,2,1,2,1,1,3,3,3,3,3,"shade on play,","outdoor classroom,garden, sep fenced 2-5,sep 5-12",15,20,300,SCHOOL,SubArea One,38.834147,-77.124638
+Beverly Park,016,"2-5,5-12",0,3,3,2,3,3,2,1,3,3,1,1,2,3,3,2,3,"shelter,no spin,free toys",unusal park because of free toys,13,23,299,PARK,SubArea Three,38.837844,-77.072265
+Hooffs Run Park Green,073,"2-5,5-12",0,3,3,2,3,3,2,1,2,3,1,3,2,3,2,2,3,"spin,spg needed","need benches on playgrd,rain prot,tables",12,24,288,PARK,SubArea Three,38.809568,-77.059406
+Bev Hills Un Methodist,109,?,0,3,3,2,3,3,2,2,2,2,1,1,2,3,3,3,2,"limited use,after school use,good social","nice play structures,sand, playhouse",13,22,286,OTHER,SubArea Three,38.838704,-77.068623
+D MacArthur School,058,?,0,3,3,3,3,3,1,1,2,2,1,1,3,3,2,2,3,"school, good equip,large open areas","nice,lg,sep play,good surfacing",13,22,286,SCHOOL,SubArea Three,38.816005,-77.08311
+Hill Park,095,"2-5,5-12",0,3,3,2,3,3,2,1,2,2,1,2,3,3,3,2,2,"one bench,fountain far,nice sand,","old park w/mature trees,sep play but linked",13,22,286,PARK,SubArea Four,38.832351,-77.061008
+J Houston School,077,?,0,3,3,2,3,3,2,1,2,1,1,1,3,3,2,3,3,"school use only during day,lg playgrd","active,good surface,closed to gen pub during day",14,20,280,SCHOOL,SubArea Four,38.808049,-77.054765
+Beach Park,067,"2-5,5-12",0,3,3,2,3,3,1,1,2,2,2,2,3,2,2,2,3,"need shade for seating,more benches,need baby swgs",,12,23,276,PARK,SubArea Three,38.813364,-77.065837
+Chinquapin Rec Center,901,2-5,0,2,1,3,3,3,3,1,3,3,3,3,2,2,3,1,3,$4 charge for 30 min per child,,11,25,275,INDOOR,SubArea Three,38.821787,-77.081566
+Chetworth Park,049,2-5,0,3,2,1,3,3,2,1,2,3,1,3,2,2,3,2,3,,"lots of props,fenced",12,22,264,PARK,SubArea Four,38.819557,-77.045916
+Watergate,131,,0,1,2,2,3,3,3,1,2,2,3,3,3,2,2,2,3,"gated,lifeguard,needs shade,nice grassy hill",part of large pool complex in gated community,12,22,264,OTHER,SubArea Two,38.808689,-77.14168
+Simpson Stadium Park,040,?,0,3,3,2,2,3,2,1,2,2,2,3,2,2,2,3,2,"ymca adj,ballfield/ymca for RR,incl gardens",free play at lg mulch area and grass,11,23,253,PARK,SubArea Three,38.82242,-77.053991
+Stevenson Park,071,"2-5,5-12",0,3,3,2,3,3,2,1,3,3,1,1,3,2,2,2,2,"nice shelter, shade trees,variety","nice new play,ada surface",11,23,253,PARK,SubArea Two,38.811435,-77.143257
+Brookvalley Park,050,?,0,3,3,2,2,3,2,1,2,3,1,1,3,3,2,2,2,"kids stray onto path,good 2-5,2 struct. not 2-5","play is strong along greenway, no destination play",12,21,252,PARK,SubArea Two,38.818803,-77.126252
+Charles Barrett Park,146,,0,3,3,3,3,3,2,3,3,1,3,3,2,1,1,2,3,"bus line,no 2-5",near rec ctr,9,28,252,SCHOOL,SubArea Three,38.841697,-77.076108
+Mt Vernon School,038,?,0,3,3,3,3,2,2,1,2,3,2,3,2,1,1,3,3,"on bus route?,sparse mulch,adj rec ctr","lacks spinning,swings, 2-5 act,good surfaces",10,25,250,SCHOOL,SubArea Three,38.827783,-77.059251
+A L Boothe Park,087,"2-5,5-12",0,3,3,2,2,2,2,1,3,2,3,1,2,2,2,2,3,"feels open, scattered,shelter,more 2-5",,11,22,242,PARK,SubArea Two,38.805484,-77.127578
+D Kelley Park Ford Nat Cen,039,?,0,3,3,3,3,3,2,2,1,1,3,0,2,2,2,2,3,"adj to rec ctr,mostly 5-12",,11,22,242,SCHOOL,SubArea One,38.826905,-77.130914
+Fayette & Queen Park (Helen Miller / Bernard Hunter Park),076,"2-5,5-12",0,3,3,2,3,3,2,1,2,3,1,1,3,2,2,2,2,"some dead grass,no todd swg,","popular,good range of act",11,22,242,PARK,SubArea Four,38.807861,-77.052248
+Lyles Crouch School,094,?,0,3,3,2,3,3,2,1,2,3,1,1,2,1,2,3,3,"assumes after school,more 2-5,gardens",good example of school play,11,22,242,SCHOOL,SubArea Four,38.800132,-77.046654
+Montgomery Park,062,"2-5,5-12",0,3,3,2,3,3,2,1,3,2,1,3,2,3,2,1,2,"pavilion,needs inside seating,lacks spinning","could be great with few upgrades,more 2-5/nature",10,24,240,PARK,SubArea Four,38.814436,-77.041162
+Del Ray Playground,800,,0,3,3,2,3,3,2,1,1,3,1,1,2,2,3,2,2,"naturally designed play eqip, stumps, rocks,topo",,11,21,231,PARK,SubArea Three,38.825626,-77.061592
+Potomac Greens HOA,124,?,0,3,1,2,3,3,1,1,1,3,1,1,2,2,2,3,3,1-5-12,another playground at parcel?,12,19,228,OTHER,SubArea Four,38.831731,-77.045639
+Ben Brenman Park,099,2-5,0,3,2,2,3,3,2,1,2,3,3,3,2,2,2,1,2,"feat not engaging,lacks int social,fence sep kids",,9,25,225,PARK,SubArea Two,38.808162,-77.113257
+George Mason School,036,?,0,3,2,2,3,3,2,1,2,2,1,1,3,2,1,2,3,"more seating,some 2-5","lots of people,after school?, good surfacing",11,20,220,SCHOOL,SubArea Three,38.828909,-77.072405
+Nannie J Lee Recreation,129,,0,3,1,2,3,3,2,1,2,3,2,2,2,2,2,2,2,rec ctr use? more 2-5,"have to go thru rec ctr or fire, great surfacing",10,22,220,REC CENTER,SubArea Four,38.796464,-77.053064
+Old Presbyterian church meeting house,152,,0,2,2,2,3,3,2,1,3,2,1,1,2,2,3,2,2,"assumed full time, inside wall, rest pkg, porch","historic setting, presumed no public in church",11,20,220,OTHER,SubArea Four,38.801468,-77.043396
+Park Fairfax,133,,0,1,1,2,2,3,1,1,3,3,3,3,2,2,2,2,2,no spinning or swings,private and posed no trespass,10,22,220,OTHER,SubArea Three,,
+Warwick Landover,021,"2-5,5-12",0,3,3,2,3,3,2,1,2,3,1,1,3,1,1,2,3,"seatwalls,no social/intell for 2-5","very new, limited for 2-5",10,22,220,PARK,SubArea Three,38.835236,-77.061754
+Fort Ward Park Hist Site,032,"2-5,5-12",0,3,1,2,2,3,1,1,2,2,1,1,2,2,2,3,3,"not ada, play isolated,2 sep structures",no fence - not near streets,12,18,216,PARK,SubArea Two,38.831184,-77.100571
+Hillwood Apt,120,?,0,3,1,2,3,3,1,1,1,2,1,1,2,2,2,3,3,,"2-12 structure?,overhead ladder",12,18,216,OTHER,SubArea One,38.831354,-77.126814
+James Mulligan Park,142,,0,3,2,2,2,2,2,1,2,2,1,1,3,2,1,3,3,"wooded,needs light/color,","good range,surfacing",12,18,216,PARK,SubArea One,38.838489,-77.107302
+MeadowCreek Apt,122,?,0,3,2,2,3,2,1,1,1,2,1,1,2,2,2,3,3,"phy domain-2-5 only,","structure,dome(2-5),swings -2 infant, 2 todd",12,18,216,OTHER,SubArea One,38.826801,-77.130727
+Mt Jefferson Park Green,030,"2-5,5-12",0,3,3,2,2,3,2,1,2,3,1,1,2,2,2,2,2,,,10,21,210,GREENWAY,SubArea Three,38.830651,-77.055817
+Fairlington Un Methodist,118,?,0,3,2,1,3,2,2,1,2,3,1,1,2,2,2,2,3,"looks private,hard to park,busy st,need 2-5",tired-looking,11,19,209,OTHER,SubArea Two,38.833049,-77.096171
+Patrick Henry School,055,?,0,3,3,2,3,2,2,1,1,2,1,1,3,2,2,1,3,"feels disconnected,no belted seats",school does not seem well thought out,11,19,209,SCHOOL,SubArea Two,38.817606,-77.111073
+Bishop of Arlington,110,?,0,1,3,2,3,3,2,3,1,1,3,3,2,2,2,1,2,"child care ctr,needs shade,no seating,RR inside","no swings,no springs,not public?",9,23,207,OTHER,SubArea Four,,
+Charles Houston Rec Center,151,,0,2,2,2,3,3,2,1,2,2,3,3,3,2,2,1,1,water at rec ctr?,fenced from outside,9,23,207,REC CENTER,SubArea Four,38.812318,-77.048279
+Tarleton Park,200,,0,3,1,1,2,3,1,1,1,3,1,1,3,2,1,3,3,,,12,17,204,PARK,SubArea Two,38.808752,-77.108361
+Goat Hill Park,029,2-5,0,3,2,2,3,3,2,1,2,2,1,1,3,2,2,2,1,"shade,more benches,more free play",nice on hillside-popular,10,20,200,PARK,SubArea Three,38.832367,-77.06101
+Armory Tot Lot,093,2-5,0,3,3,2,3,3,1,1,2,3,1,1,2,2,1,2,2,"indoor play area in mall, few plastic structures",,9,22,198,PARK,SubArea Four,38.803021,-77.043672
+Charles Barrett School,145,,0,3,3,3,3,2,2,1,2,1,2,2,2,1,1,3,2,"bus line,surfacing has grass,one bench","more 2-5, garden, lg mulch",9,22,198,SCHOOL,SubArea Three,38.841731,-77.076124
+James K Polk School,042,?,0,3,3,2,3,3,2,1,2,3,1,1,2,1,1,2,3,"school,not great 2-5,play other side bldg not 2-5","big play,schoolyard not as impressive",9,22,198,SCHOOL,SubArea Two,38.822448,-77.116993
+Southern Towers,128,?,0,1,2,2,3,3,2,1,1,3,1,1,2,2,1,3,3,"res or guest only,5-12 struc,6 swings","private,no path,swings too high",11,18,198,OTHER,SubArea One,38.83263,-77.112798
+Landmark Mall,902,,0,3,3,2,2,3,2,1,3,3,3,1,2,2,1,1,2,"in mall, not a lot of equip,primary user under 6",,8,24,192,INDOOR,SubArea Two,38.816134,-77.131862
+EOS 21 Condo,116,?,0,1,1,2,3,3,2,3,1,1,2,2,3,2,2,1,2,"locked,presumed daycare,RR/Water in daycare",2 structures eitherside of pool,10,19,190,OTHER,SubArea Two,38.810437,-77.130336
+ARHA_Oronoco,106,?,0,3,2,2,3,3,2,1,2,3,1,1,1,2,2,2,2,"pres public housing,no 2-5,grass area fenced","nice area for public housing, needs more 2-5",9,21,189,OTHER,SubArea Four,,
+Chatham Square HOA,113,?,0,3,2,2,3,3,2,1,2,3,1,1,1,2,2,2,2,,,9,21,189,OTHER,SubArea Four,38.808781,-77.04323
+G Washington School,059,?,0,3,3,3,3,3,1,1,2,1,1,1,2,2,2,2,1,"metro nearby,no spin,open lawn is exposed",Head Start Program,9,21,189,SCHOOL,SubArea Three,38.815219,-77.05637
+Exchange at Van Dorn,117,?,0,1,1,2,3,3,2,1,2,3,1,1,2,2,2,2,2,,,10,18,180,OTHER,SubArea Two,38.801673,-77.120344
+Hume Springs Park,019,"2-5,5-12",0,3,3,2,2,2,2,1,2,1,1,1,2,2,2,2,2,"auto across street, industrial feel, one bench",,10,18,180,PARK,SubArea Three,38.83818,-77.058274
+Mason Avenue Park,046,"2-5,5-12",0,3,3,2,2,2,2,1,2,3,1,1,3,2,1,2,1,"spin spring,swing,all 2-5,sm free play, worn grass","shaded,needs social/creative play",9,20,180,PARK,SubArea Three,38.820804,-77.062244
+Powhatan Park,051,"2-5,5-12",0,3,3,2,2,2,1,1,1,2,1,1,2,2,2,2,2,"not welcoming,fenced,next to busy st",,10,18,180,PARK,SubArea Four,38.817729,-77.048992
+Sunset Park,081,2-5,0,3,3,1,2,3,1,1,1,2,1,1,2,2,2,2,2,"on busy st,no pakg,",,10,18,180,PARK,SubArea Three,38.807218,-77.062165
+Samuel Tucker Elementary,136,,0,3,2,2,3,3,2,1,3,3,1,1,2,2,2,1,1,"school,porticos,no social 2-5",new,8,22,176,SCHOOL,SubArea Two,38.805469,-77.127557
+Chinquapin Park,140,,0,3,2,2,2,2,1,1,3,2,1,1,2,2,1,2,2,"worn,no play during school, shelter, seating far","more 2-5,nice but little use",9,19,171,PARK,SubArea Three,38.821826,-77.081645
+Lynhaven Park,020,"2-5,5-12",0,3,3,2,2,1,2,1,2,3,2,2,2,2,2,1,1,"cluttered surroundings,people cut thru,rec ctr but","confined,no spin, update fence/circul,",8,21,168,PARK,SubArea Three,38.836545,-77.056602
+Maury School,063,?,0,3,3,2,3,3,2,1,2,2,1,1,1,1,1,2,3,"after hours only,, lacks 2-5","lg play at school, but not age appr.",8,21,168,SCHOOL,SubArea Three,38.813368,
+Newport Village Apt,132,,0,0,1,2,3,2,2,1,1,3,1,1,2,2,2,2,3,"1 struc, 2-12 yrs afe , some for 2-5","no fence,no ada,ewf/half covered,sm shelter",11,15,165,OTHER,SubArea One,38.837501,-77.111296
+ARHA_Whiting,107,?,0,1,2,2,3,3,2,1,2,2,1,1,2,2,2,2,1,"more 2-5, no space for free play",,9,18,162,OTHER,SubArea Two,38.810169,-77.136896
+Cameron Parke Townes,112,?,0,1,1,2,3,3,2,1,2,3,1,1,2,2,2,2,1,no signage restricting public use,playhouse is in fall zone of slide,9,18,162,OTHER,SubArea Two,38.805327,-77.094769
+Holmes Run Park-S. Jordan St.,098,?,0,3,3,2,3,2,2,1,2,3,2,2,2,1,1,2,1,"sufacing needs renovated,across bridge RR/water","no 2-5 for social/physical,intell",7,23,161,PARK,SubArea Two,,
+Angel  Park,101,"2-5,5-12",0,3,3,2,2,3,2,1,2,2,1,1,2,1,2,2,1,"close to road,benches not shaded, more 2-5","fenced areas has no free play, area out too steep",8,20,160,PARK,SubArea Three,38.809893,-77.075151
+Grace Episcopal,119,?,0,1,1,2,3,3,1,1,2,1,1,1,2,3,3,1,1,"private prop,more spin,","hard to find, not open to public",10,16,160,OTHER,SubArea Three,38.836985,-77.064171
+Woodbine Park,700,,0,3,3,2,3,3,1,1,1,2,1,1,2,1,1,2,2,,,8,20,160,PARK,SubArea Three,38.829289,-77.082485
+Buchanan Park,201,,0,3,2,3,3,2,1,1,1,2,1,1,2,1,1,1,3,,,8,19,152,PARK,SubArea Four,38.808607,-77.057203
+Ewald Park,600,,0,3,2,2,3,2,1,1,1,2,2,1,2,1,1,2,2,looks like tot lot with equipment for older kids,,8,19,152,PARK,SubArea Two,38.811267,-77.108631
+Van Dorn Edsall,134,,0,1,2,2,2,2,2,1,2,2,1,1,2,2,2,2,1,"no ADA,close to pkg,needs fence,upgrade sufg",surface slopes too much,9,16,144,OTHER,SubArea Two,38.809175,-77.133931
+Cora Kelly School,011,?,0,3,2,1,2,1,1,1,1,2,2,2,2,1,1,1,3,"RR around bldg, not much 2-5, loc hidden","access after school only, rec ctr prior until 6pm",8,17,136,SCHOOL,SubArea Three,38.838189,-77.058279
+Four Mile Run Park,001,"2-5,5-12",0,3,1,1,2,2,1,1,2,1,1,1,2,1,1,2,3,"pleasant,remote,along trail, no benches,no 2-5 sw","feels unsecure, seperated",9,15,135,PARK,SubArea Three,38.842267,-77.061253
+ARHA_Henry,105,?,0,3,3,2,3,2,2,1,1,1,1,1,2,1,1,1,2,"open,exposed,no seating,more 2-5","feels tired,good use",7,18,126,OTHER,SubArea Four,,
+Mt Vernon School,037,?,0,3,3,3,3,2,2,1,1,1,3,1,1,1,1,1,2,"at Rec Ctr,north side of school,not 2-5",,6,21,126,SCHOOL,SubArea Three,38.828956,-77.059454
+TC Williams,139,,0,3,1,1,2,2,2,1,2,1,1,1,2,2,2,1,1,hidden in pit,High School-Head Start Program,8,15,120,SCHOOL,SubArea Three,38.823558,-77.084686
+ARHA_Braddock,104,?,0,3,3,3,2,1,2,1,1,1,1,1,1,2,2,1,1,"serves housing,on bus line,location unappealing","no swings/spin,small,feels exp",7,17,119,OTHER,SubArea Two,,
+ARHA_551 Royal,103,?,0,3,3,2,3,2,2,1,2,1,1,1,1,1,1,1,2,"needs better lands,lim shade,more 2-5","feels tired,no 2-5, not inviting",6,19,114,OTHER,SubArea Four,38.809627,-77.042141
+Brookville Apts,111,?,0,3,1,2,2,2,2,1,1,2,1,1,1,1,1,1,3,"public housing?,feels private,close to pkg lot",not really for 2-5,7,16,112,OTHER,SubArea Two,38.819852,-77.124596
+South Port Apt,127,?,0,1,2,2,3,2,2,1,1,2,1,1,2,1,1,1,2,"exposed,no shade for seating,no small grp play","no 2-5, needs landscaping and upgrades",7,16,112,OTHER,SubArea Two,38.806045,-77.138761
+Old Town Village,789,,0,1,1,2,3,2,1,1,1,2,1,1,1,1,1,2,2,,,7,15,105,OTHER,SubArea Four,,
+Mayflower Square Condos,141,,0,1,1,2,3,3,2,1,2,2,1,1,1,1,1,1,2,"no 2-5,swgs missing",fenced area convert to 2-5,6,17,102,OTHER,SubArea One,38.820111,-77.135636
+Summers Grove Townhomes,138,,0,1,1,1,3,2,2,1,1,1,1,1,2,1,1,1,2,"play are on sport court,makeshift playgrd",good retrofit where none avail to residents,7,13,91,OTHER,SubArea Two,38.801192,-77.132686
+Bennington Crossing Apt,108,?,0,1,2,2,2,2,2,1,1,2,1,1,1,1,1,1,2,"no fence bet play/park,needs landscaping/shade","no swings/spin, not age appropriate",6,15,90,OTHER,SubArea One,38.82043,-77.132311
+EOS 21 Condo,130,,0,1,1,2,3,2,2,1,1,2,1,1,1,1,1,1,2,"needs trees,no2-5,grass nearby",not suited for 2-5 snf not inviting,6,15,90,OTHER,SubArea Two,38.812743,-77.126318
+Saxony Square,137,,0,1,2,2,2,2,2,1,2,3,1,1,1,1,1,1,1,"close to pkg,nice bench,no phys 2-5",good shade but squeezed,5,17,85,OTHER,SubArea One,38.822583,-77.131748
+Brent Place,135,,0,1,1,2,1,1,2,1,1,1,1,1,2,1,1,1,1,locked,"no play space,not for residents",6,11,66,OTHER,SubArea Two,38.808636,-77.130817
+Monarch,100,?,0,3,1,2,3,3,2,1,1,2,1,1,0,0,0,1,2,open grass,"no equipment, has potential, in dense space",3,18,54,OTHER,SubArea Four,38.810773,-77.050898
+Elbert Apts,115,?,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"visited,playground removed, plans for new",,0,0,0,OTHER,SubArea Three,,
+Portal West,123,?,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"not visited, locked",,0,0,0,OTHER,SubArea Three,,
+Sentinel of Landmark,126,?,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,not able to access,,0,0,0,OTHER,SubArea Two,38.812348,-77.140862

@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
 gem 'fastercsv'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'rake', '0.8.7'
+gem 'spreadsheet'
 
 group :development, :test do
 	gem 'sqlite3'
