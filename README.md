@@ -1,4 +1,3 @@
-
 ## Setup
 
 ### Install dependencies
@@ -17,6 +16,8 @@
 
 ### Start vagrant server
 `vagrant up`
+
 `vagrant reload`
+
 *This will take a while the first time you run it, but will be faster afterwards.*
 
