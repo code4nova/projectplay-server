@@ -43,16 +43,17 @@ require 'csv'
 #=begin
   #Playground.delete_all
   # To import for production:
+  fields = [:name, :mapid, :agelevel, :totplay, :openaccess, :invitation, :access,
+            :safelocation, :conditions, :monitoring, :programming, :weather, :seating,
+            :restrooms, :drinkingw, :physicald, :socialdom, :intellect, :naturualen,
+            :freeunstruct, :specificcomments, :generalcomments, :compsum, :modsum,
+            :graspvalue, :playclass, :subarea, :lat, :long]
   i = 0
   CSV.foreach(Rails.root.to_s + '/db/Alex_Components.csv') do |row|
     unless row[0] == 'LOCATION'
       puts "Writing name of: " + row[0].to_s
       i = i + 1
-      Playground.create(:name => row[0], :mapid => row[1], :agelevel => row[2], :totplay => row[3], :openaccess => row[4], :invitation => row[5], :access => row[6],
-                        :safelocation => row[7], :conditions => row[8], :monitoring => row[9], :programming => row[10], :weather => row[11], :seating => row[12],
-                        :restrooms => row[13], :drinkingw => row[14],  :physicald => row[15], :socialdom => row[16], :intellect => row[17], :naturualen => row[18],
-                        :freeunstruct => row[19], :specificcomments => row[20], :generalcomments => row[21], :compsum => row[22], :modsum => row[23],
-                        :graspvalue => row[24], :playclass => row[25], :subarea => row[26], :lat => row[27], :long => row[28])
+      Playground.create(Hash[fields.zip(row)])
     end
   end
 #=end
