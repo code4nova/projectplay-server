@@ -7,7 +7,7 @@ class PlaygroundsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @playgrounds }
+      format.json { render :json => @playgrounds, :callback => params[:callback]}
     end
   end
 
@@ -63,7 +63,7 @@ class PlaygroundsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @playground }
+      format.json { render :json => @playground, :callback => params[:callback] }
     end
   end
 
