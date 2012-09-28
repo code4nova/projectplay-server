@@ -8,10 +8,12 @@ gem 'fastercsv'
 
 gem 'rake', '0.8.7'
 gem 'spreadsheet'
+gem 'kaminari'
 
 group :development, :test do
 	gem 'sqlite3'
 end
+
 group :production do
 	gem 'pg'
 	gem 'thin'

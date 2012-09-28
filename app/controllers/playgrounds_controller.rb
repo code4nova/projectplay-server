@@ -10,6 +10,15 @@ class PlaygroundsController < ApplicationController
       format.json { render :json => @playgrounds, :callback => params[:callback]}
     end
   end
+  
+  def showpage
+    @playgrounds = Playground.page(params[:page]).per(params[:numperpage])
+
+    respond_to do |format|
+      format.html # showpage.html.erb
+      format.json { render :json => @playgrounds, :callback => params[:callback]}
+    end
+  end
 
   def addToGooglePlaces
     # The API key info is stored in an environmental variable for privacy

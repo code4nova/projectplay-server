@@ -10,7 +10,9 @@ Projectplay::Application.routes.draw do
   resources :playgrounds do
     collection do
       get :addToGooglePlaces
+      get 'page/:page/:numperpage', :action => :showpage
     end
+    
   end
 
   # The priority is based upon order of creation:
