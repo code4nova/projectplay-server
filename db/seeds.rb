@@ -47,10 +47,10 @@ require 'csv'
             :safelocation, :conditions, :monitoring, :programming, :weather, :seating,
             :restrooms, :drinkingw, :physicald, :socialdom, :intellect, :naturualen,
             :freeunstruct, :specificcomments, :generalcomments, :compsum, :modsum,
-            :graspvalue, :playclass, :subarea, :lat, :long]
+            :graspvalue, :playclass, :subarea, :lat, :long, :google_placesid]
   i = 0
-  CSV.foreach(Rails.root.to_s + '/db/Alex_Components.csv') do |row|
-    unless row[0] == 'LOCATION'
+  CSV.foreach(Rails.root.to_s + '/db/Alex_Components2.csv') do |row|
+    unless row[0] == 'Name'
       puts "Writing name of: " + row[0].to_s
       i = i + 1
       Playground.create(Hash[fields.zip(row)])
