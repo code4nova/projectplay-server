@@ -1,4 +1,8 @@
 Projectplay::Application.routes.draw do
+  
+
+  
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
@@ -10,7 +14,7 @@ Projectplay::Application.routes.draw do
   resources :playgrounds do
     collection do
       get :addToGooglePlaces
-      get 'page/:page/:numperpage', :action => :showpage
+      get 'page(.:format)/:page/:numperpage', :action => :showpage
     end
     
   end
