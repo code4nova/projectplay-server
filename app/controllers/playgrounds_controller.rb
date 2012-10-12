@@ -19,6 +19,12 @@ class PlaygroundsController < ApplicationController
       format.json { render :json => @playgrounds, :callback => params[:callback]}
     end
   end
+  
+  def getPlaygrounds
+    # from params[:address] params[:radius in feet]
+    # geocode the address into lat long, and then make the web request to places
+    # send back result set of playgrounds within that radius from the address - json dataset
+  end
 
   def showFromGooglePlaces
     url = "https://maps.googleapis.com/maps/api/place/search/json?location=38.8162,-77.0713&radius=5000&types=park&sensor=false&key=" + ENV['GPLACES_KEY']

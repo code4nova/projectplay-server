@@ -3,5 +3,5 @@ class Playground < ActiveRecord::Base
   :drinkingw, :freeunstruct, :generalcomments, :graspvalue, :intellect,
   :invitation, :mapid, :modsum, :monitoring, :name, :naturualen,
   :openaccess, :physicald, :programming, :restrooms, :safelocation, :seating,
-  :socialdom, :specificcomments, :subarea, :totplay, :weather, :lat, :long
+  :socialdom, :specificcomments, :subarea, :totplay, :weather, :lat, :long, :google_placesid
 end
