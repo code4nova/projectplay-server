@@ -22,15 +22,47 @@ class PlaygroundsController < ApplicationController
   
   def getPlaygrounds
     # from params[:address] params[:radius in feet]
+    radius = 0
+    if params[:radius].nil?
+      # places API takes radius in meters - there are 3.28084 feet per meter
+      radius = (5280/2)/3.28084
+    else
+      radius = params[:radius].to_i/3.28084
+    end
+    usergeo = get_geo_from_google(params[:address])
     # geocode the address into lat long, and then make the web request to places
+    @playgroundset = showFromGooglePlaces(usergeo[:lat], usergeo[:long], radius)
     # send back result set of playgrounds within that radius from the address - json dataset
+    respond_to do |format|
+      format.html # getPlaygrounds.html.erb
+      format.json { render :json => @playgroundset, :callback => params[:callback]}
+    end
   end
 
-  def showFromGooglePlaces
-    url = "https://maps.googleapis.com/maps/api/place/search/json?location=38.8162,-77.0713&radius=5000&types=park&sensor=false&key=" + ENV['GPLACES_KEY']
-    # Request all playgrounds from Google Places under our API key that are 50,000 meters (max radius) from oldtown Alexandria (lat,long) = 38.8162, 77.0713
-    @returninfo = postURLonly(url)
-
+  def showFromGooglePlaces(lat, long, radius)
+    if radius != 0
+      url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + lat.to_s + "," + long.to_s + "&radius=" + radius.to_s + "&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] 
+    else
+      url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + lat.to_s + "," + long.to_s + "&rankby=distance&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] 
+    end
+    # Request all playgrounds from Google Places under our API key that are radius from lat,long
+    returninfo = postURLonly(url)
+    puts "Return info: " + returninfo.to_s
+    jdoc = JSON.parse(returninfo)
+    # jdoc is a result - so nested hashes would make googresults a hash
+    googresults = jdoc.fetch("results")
+    # Googresults is an array - each element should be one listing of Gplaces
+    # compare the results to what is in our database for the id
+    playgroundresult = Array.new
+    googresults.each do |r|
+      if Playground.where("google_placesid = ?", r.fetch("id")).first
+        # its in our database - put it in the array
+        playgroundresult.push(Playground.where("google_placesid = ?", r.fetch("id")).first)
+      end
+    end
+    # playgroundresult is an array of playground ActiveRecord objects - each one
+    # being a playground in the rails database
+    return playgroundresult
   end
 
   def addToGooglePlaces
@@ -79,21 +111,49 @@ class PlaygroundsController < ApplicationController
       req.body = json
       res = ht.request(req)
     end
+    puts res.body
     res.body
   end
 
   def postURLonly(uri)
-    res = ""
     http = Net::HTTP.new('maps.googleapis.com', '443')
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     resp = http.start do |ht|  
-      req = Net::HTTP::Post.new(uri)
-      #req["content-type"] = "application/json"
+      req = Net::HTTP::Get.new(uri)
       res = ht.request(req)
+      return res.body
     end
-    res.body
   end
+  
+  def get_geo_from_google(address)
+    geocoder = "http://maps.googleapis.com/maps/api/geocode/json?address="
+    output = "&sensor=false"
+    # address = "424+ellis+st+san+francisco"
+    # replace any ampersands with "and" since ampersands don't seem to work with the google query
+    address =  address.sub( "&", "and" )
+    request = geocoder + address.tr(' ', '+') + output
+    url = URI.escape(request)
+    resp = Net::HTTP.get_response(URI.parse(url))
+    #parse result if result received properly
+    if resp.is_a?(Net::HTTPSuccess)
+      #parse the json
+      parse = JSON.parse(resp.body)
+      #check if google went well
+      if parse.fetch("status") == "OK"
+       # return parse if raw == true
+        parse.fetch("results").each do |result|
+          geo_hash = {  :lat => result["geometry"]["location"]["lat"],
+                        :long => result["geometry"]["location"]["lng"]
+          }
+          return geo_hash
+        end
+     end
+    end
+    return parse 
+  end
+  
+  
   # GET /playgrounds/1
   # GET /playgrounds/1.json
   def show

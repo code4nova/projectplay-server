@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+<table>
+  <tr>
+    <th><b>Name:</b></th>
+    <th><b>Mapid:</b></th>
+    <th><b>Agelevel:</b></th>
+    <th><b>Totplay:</b></th>
+    <th><b>Openaccess:</b></th>
+    <th><b>Invitation:</b></th>
+    <th><b>Access:</b></th>
+    <th><b>Safelocation:</b></th>
+    <th><b>Conditions:</b></th>
+    <th><b>Monitoring:</b></th>
+    <th><b>Programming:</b></th>
+    <th><b>Weather:</b></th>
+    <th><b>Seating:</b></th>
+    <th><b>Restrooms:</b></th>
+    <th><b>Drinkingw:</b></th>
+    <th><b>Physicald:</b></th>
+    <th><b>Socialdom:</b></th>
+    <th><b>Intellect:</b></th>
+    <th><b>Naturualen:</b></th>
+    <th><b>Freeunstruct:</b></th>
+    <th><b>Specificcomments:</b></th>
+    <th><b>Generalcomments:</b></th>
+    <th><b>Compsum:</b></th>
+    <th><b>Modsum:</b></th>
+    <th><b>Graspvalue:</b></th>
+    <th><b>Class:</b></th>
+    <th><b>Subarea:</b><th>
+  </tr>
+  <% @playgroundset.each do |playground| %>
+  <tr>
+    <td><%= playground.name %></td>
+    <td><%= playground.mapid %></td>
+    <td><%= playground.agelevel %></td>
+    <td><%= playground.totplay %></td>
+    <td><%= playground.openaccess %></td>
+    <td><%= playground.invitation %></td>
+    <td><%= playground.access %></td>
+    <td><%= playground.safelocation %></td>
+    <td><%= playground.conditions %></td>
+    <td><%= playground.monitoring %></td>
+    <td><%= playground.programming %></td>
+    <td><%= playground.weather %></td>
+    <td><%= playground.seating %></td>
+    <td><%= playground.restrooms %></td>
+    <td><%= playground.drinkingw %></td>
+    <td><%= playground.physicald %></td>
+    <td><%= playground.socialdom %></td>
+    <td><%= playground.intellect %></td>
+    <td><%= playground.naturualen %></td>
+    <td><%= playground.freeunstruct %></td>
+    <td><%= playground.specificcomments %></td>
+    <td><%= playground.generalcomments %></td>
+    <td><%= playground.compsum %></td>
+    <td><%= playground.modsum %></td>
+    <td><%= playground.graspvalue %></td>
+    <td><%= playground.class %></td>
+    <td><%= playground.subarea %></td>
+  </tr>
+  <% end %>
+<%= link_to 'Back', playgrounds_path %>

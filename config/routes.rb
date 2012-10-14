@@ -15,6 +15,8 @@ Projectplay::Application.routes.draw do
     collection do
       get :addToGooglePlaces
       get 'page(.:format)/:page/:numperpage', :action => :showpage
+      get "showpage"
+      get "getPlaygrounds"
     end
     
   end
