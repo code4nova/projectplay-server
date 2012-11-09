@@ -6,7 +6,7 @@ var playApp = function()
 		startLatLon: [38.818860, -77.091497],
 		startZoom: 13,
 	    logo: "/assets/aplays.png",
-	    playUrl: "http://localhost:3000/"
+	    playUrl: "http://projectplay.herokuapp.com/"
 	};
 
 	inst.lastCircle = null;
