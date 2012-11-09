@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Projectplay</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
+	<head>
+		<title>Project Play</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="/assets/styles.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/le-frog/jquery-ui.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="/assets/bootstrap.min.css" >
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places,geometry" ></script>
+		<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+		<!--<script src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>-->
+		<script src="/assets/bootstrap.min.js"></script>
+		<script src ="/assets/playSvc.js"></script>
+		<script src="/assets/app.js" ></script>
+                <%= stylesheet_link_tag    "application", :media => "all" %>
+                <%= javascript_include_tag "application" %>
+                <%= csrf_meta_tags %>
+	    <script>
+	      var app;
+	      $(document).ready(function() { app = playApp(); app.initialize(); });
+	    </script>
+	</head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 <%= yield %>
 
 </body>

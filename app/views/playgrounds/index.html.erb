@@ -1,13 +1,25 @@
-	<div style="height=100"></div>
-        <div class="ribbon-wrapper">
-		<div class="ribbon-front">
-                        <br>
-			<center><h1>Project Play - Coming Soon</h1></center>
-		</div>
-		<div class="ribbon-edge-topleft"></div>
-		<div class="ribbon-edge-topright"></div>
-		<div class="ribbon-edge-bottomleft"></div>
-		<div class="ribbon-edge-bottomright"></div>
-		<div class="ribbon-back-left"></div>
-		<div class="ribbon-back-right"></div>
+<div id="side_bar">
+	<div id="branding">
+		<%= image_tag("projectplay.png", :id => "header_img") %>
+		<div id="header_bar"></div>
+		<div id="overhang_bar"></div>
 	</div>
+	<div id="app_panel">
+		<a id='showAllBtn' class='btn btn-block btn-medium'>Show All Playgrounds <i class="icon-chevron-right"></i></a>
+		<hr class='hr4' /> 
+		<div class="input-append">
+			<input id="inputAddress" placeholder="Type your address..." size="16" type="text">
+			<button id="addressSearchBtn" class="btn" type="button">Go</button>
+		</div>
+		<span class="sbtext">Within</span>
+		<select id="inputDistance" class='input-mini'>
+			<option>1</option>
+			<option>2</option>
+			<option>3</option>
+			<option>4</option>
+			<option>5</option>
+		</select>
+		<span class="sbtext">mile(s) of my location</span>
+	</div>
+</div>
+<div id="map_canvas"></div>

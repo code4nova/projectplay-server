@@ -1,0 +1,63 @@
+
+html, body, #map_canvas {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+html {
+	overflow: hidden
+}
+
+#header_bar {
+	height: 45px;
+	background-color:#333333;
+}
+
+#overhang_bar {
+	height: 15px;
+	background-color: #1d7713;
+	border-top: dotted #22ad29 2px;
+}
+
+#hidden_h1 {
+	display: none;
+}
+
+#map_canvas {
+	height: 100%;
+	margin-left: 302px;
+}
+
+#side_bar {
+	height: 100%;
+	width: 300px;
+	position: absolute;
+	top:0px;
+	left:0px;
+	background-color: #1d7713;
+	border-right: solid #666666 1px;
+}
+
+.sbtext {
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+
+#header_img {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#app_panel {
+	margin: 5px 10px 5px 10px;
+}
+
+  hr.hr4 {
+      border-top: 1px dotted #22ad29;
+      border-bottom: 1px dotted #22ad29;
+      height: 2px;
+    }
