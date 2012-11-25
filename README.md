@@ -9,6 +9,9 @@
 ### Load data
 `bundle exec rake db:seed`
 
+### Refresh data per new measurements/values of 9/19/2012
+`bundle exec rake db:datarefresh`
+
 ### Start server
 `rails server`
 
