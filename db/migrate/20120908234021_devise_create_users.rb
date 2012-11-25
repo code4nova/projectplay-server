@@ -1,4 +1,5 @@
 class DeviseCreateUsers < ActiveRecord::Migration
+=begin  
   def self.up
     create_table(:users) do |t|
       	## Database authenticatable
@@ -65,4 +66,5 @@ class DeviseCreateUsers < ActiveRecord::Migration
   def self.down
     drop_table :users
   end
+=end
 end
