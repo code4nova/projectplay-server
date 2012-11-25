@@ -52,11 +52,15 @@ class PlaygroundsController < ApplicationController
     if @urlweb == ""
       # Are there aliases?
       playground = Playground.where("name = ?", params[:name]).first
-      if playground.aliases.count != 0 
-        playground.aliases.each do |a|
-          url2 = getURLtoGooglePlacePage(a.aliasname)
-          unless url2.nil?
-            @urlweb = url2
+      if playground.nil?
+        @urlweb = "Playground Not in ProjectPlay Database"
+      else  
+        if playground.aliases.count != 0 
+          playground.aliases.each do |a|
+            url2 = getURLtoGooglePlacePage(a.aliasname)
+            unless url2.nil?
+              @urlweb = url2
+            end
           end
         end
       end
