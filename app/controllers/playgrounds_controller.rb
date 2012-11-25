@@ -31,7 +31,9 @@ class PlaygroundsController < ApplicationController
     end
     usergeo = get_geo_from_google(params[:address])
     # geocode the address into lat long, and then make the web request to places
-    @playgroundset = showFromGooglePlaces(usergeo[:lat], usergeo[:long], radius)
+    @playgroundhash = showFromGooglePlaces(usergeo[:lat], usergeo[:long], radius)
+    #@playgroundset = @playgroundhash["playground"]
+    #@urlset = @playgroundhash["placespage"]
     # send back result set of playgrounds within that radius from the address - json dataset
     respond_to do |format|
       format.html # getPlaygrounds.html.erb
@@ -47,21 +49,61 @@ class PlaygroundsController < ApplicationController
     end
     # Request all playgrounds from Google Places under our API key that are radius from lat,long
     returninfo = postURLonly(url)
-    puts "Return info: " + returninfo.to_s
+    #puts "URL: " + url
+    #puts "Return info: " + returninfo.to_s
     jdoc = JSON.parse(returninfo)
     # jdoc is a result - so nested hashes would make googresults a hash
     googresults = jdoc.fetch("results")
     # Googresults is an array - each element should be one listing of Gplaces
     # compare the results to what is in our database for the id
     playgroundresult = Array.new
+    placesurl = ""
+    placespage = ""
+    placespagehash = Hash.new
     googresults.each do |r|
-      if Playground.where("google_placesid = ?", r.fetch("id")).first
-        # its in our database - put it in the array
-        playgroundresult.push(Playground.where("google_placesid = ?", r.fetch("id")).first)
+      # check if there is a Google Places URL for whatever this place is:
+      placesurl = "https://maps.googleapis.com/maps/api/place/details/json?reference=" +
+      r.fetch("reference") + "&sensor=true&key=" + ENV['GPLACES_KEY']
+      placesinfo = postURLonly(placesurl)
+      kdoc = JSON.parse(placesinfo)
+      #puts "Google Places Detail: " + kdoc.fetch("result").to_s
+      placesresults = kdoc.fetch("result")
+      if placesresults.has_key?("url")
+        placespagehash[r.fetch("name")] = placesresults.fetch("url")
+        puts "Found a URL! Name:" + r.fetch("name") + " URL: " + placesresults.fetch("url")
+      end
+    end
+    googresults.each do |r|
+      if Playground.where("name = ?", r.fetch("name")).first
+        # This is a Playground Place in our database - now check against aliases
+        currpg = Playground.where("name = ?", r.fetch("name")).first
+        placespage = ""
+        if placespagehash.has_key?(r.fetch("name"))
+           placespage = placespagehash[r.fetch("name")]
+        else
+          aliases = Alias.where("playground_id = ?", currpg.id)
+          aliases.each do |a|
+            if placespagehash.has_key?(a.aliasname)
+              placespage = placespagehash[a.aliasname]
+              puts "Found a match url: " + placespage
+            end
+          end
+        end
+        # Check that this playgroundresult isn't already in the array
+        unless playgroundresult.include?({ "playground" => Playground.where("name = ?", r.fetch("name")).first, "placespage" => placespage})
+        # The array is an array of hashes, first key is the Playground ActiveRecord object, second key
+        # is the URL returned from a Google Places Details query which should be the URL
+        # of the special Google Places page just for that park with all kinds of neat
+        # G+ user contributed content
+          playgroundresult.push({ "playground" => Playground.where("name = ?", r.fetch("name")).first, "placespage" => placespage})
+        end
       end
     end
     # playgroundresult is an array of playground ActiveRecord objects - each one
     # being a playground in the rails database
+    # make a hash of our arrays and return it
+    #returnhash = Hash.new
+    #returnhash = {"dbplaygrounds" => playgroundresult, "googplaygrounds" => googresultsfound }
     return playgroundresult
   end
 

@@ -2,6 +2,7 @@
 <table>
   <tr>
     <th><b>Name:</b></th>
+    <th><b>Places Page:</b></th>
     <th><b>Mapid:</b></th>
     <th><b>Agelevel:</b></th>
     <th><b>Totplay:</b></th>
@@ -29,35 +30,36 @@
     <th><b>Class:</b></th>
     <th><b>Subarea:</b><th>
   </tr>
-  <% @playgroundset.each do |playground| %>
+  <% @playgroundhash.each do |playground| %>
   <tr>
-    <td><%= playground.name %></td>
-    <td><%= playground.mapid %></td>
-    <td><%= playground.agelevel %></td>
-    <td><%= playground.totplay %></td>
-    <td><%= playground.openaccess %></td>
-    <td><%= playground.invitation %></td>
-    <td><%= playground.access %></td>
-    <td><%= playground.safelocation %></td>
-    <td><%= playground.conditions %></td>
-    <td><%= playground.monitoring %></td>
-    <td><%= playground.programming %></td>
-    <td><%= playground.weather %></td>
-    <td><%= playground.seating %></td>
-    <td><%= playground.restrooms %></td>
-    <td><%= playground.drinkingw %></td>
-    <td><%= playground.physicald %></td>
-    <td><%= playground.socialdom %></td>
-    <td><%= playground.intellect %></td>
-    <td><%= playground.naturualen %></td>
-    <td><%= playground.freeunstruct %></td>
-    <td><%= playground.specificcomments %></td>
-    <td><%= playground.generalcomments %></td>
-    <td><%= playground.compsum %></td>
-    <td><%= playground.modsum %></td>
-    <td><%= playground.graspvalue %></td>
-    <td><%= playground.class %></td>
-    <td><%= playground.subarea %></td>
+    <td><%= playground["playground"].name %></td>
+    <td><a href="<%= playground["placespage"] %>"><%= playground["placespage"] %></a></td>
+    <td><%= playground["playground"].mapid %></td>
+    <td><%= playground["playground"].agelevel %></td>
+    <td><%= playground["playground"].totplay %></td>
+    <td><%= playground["playground"].opentopublic %></td>
+    <td><%= playground["playground"].invitation %></td>
+    <td><%= playground["playground"].howtogetthere %></td>
+    <td><%= playground["playground"].safelocation %></td>
+    <td><%= playground["playground"].shade %></td>
+    <td><%= playground["playground"].monitoring %></td>
+    <td><%= playground["playground"].programming %></td>
+    <td><%= playground["playground"].weather %></td>
+    <td><%= playground["playground"].seating %></td>
+    <td><%= playground["playground"].restrooms %></td>
+    <td><%= playground["playground"].drinkingw %></td>
+    <td><%= playground["playground"].activeplay %></td>
+    <td><%= playground["playground"].socialplay %></td>
+    <td><%= playground["playground"].creativeplay %></td>
+    <td><%= playground["playground"].naturualen %></td>
+    <td><%= playground["playground"].freeplay %></td>
+    <td><%= playground["playground"].specificcomments %></td>
+    <td><%= playground["playground"].generalcomments %></td>
+    <td><%= playground["playground"].compsum %></td>
+    <td><%= playground["playground"].modsum %></td>
+    <td><%= playground["playground"].graspvalue %></td>
+    <td><%= playground["playground"].class %></td>
+    <td><%= playground["playground"].subarea %></td>
   </tr>
   <% end %>
 <%= link_to 'Back', playgrounds_path %>
