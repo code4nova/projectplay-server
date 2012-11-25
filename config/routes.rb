@@ -17,6 +17,7 @@ Projectplay::Application.routes.draw do
       get 'page(.:format)/:page/:numperpage', :action => :showpage
       get "showpage"
       get "getPlaygrounds"
+      get "getPlacesURLforPlayground"
     end
     
   end

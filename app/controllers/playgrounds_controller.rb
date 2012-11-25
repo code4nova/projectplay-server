@@ -1,15 +1,71 @@
 require 'net/http'
+require 'uri'
 class PlaygroundsController < ApplicationController
   # GET /playgrounds
   # GET /playgrounds.json
   def index
     @playgrounds = Playground.all
-
+    @playgroundURL = Hash.new
+    # For every playground in the database, get a Places Page URL if one exists
+    # The best primaryish key I can find is basically the playground name
+    # But, because there could be different spellings/variances, we also search
+    # against the Aliases relation for each Playground listing
+=begin   
+    @playgrounds.each do |p|
+      # If we don't get a URL from the actual name, then hit the aliases
+      url1 = getURLtoGooglePlacePage(p.name)
+      if url1 != ""
+        puts "Found a URL w/o alias: " + url1
+      end
+      if url1 == ""
+        if p.aliases.count != 0 
+          p.aliases.each do |a|
+            url2 = getURLtoGooglePlacePage(a.aliasname)
+            unless url2.nil?
+              puts "Saving an alias URL for: " + p.name
+              @playgroundURL[p.name] = url2
+            end
+          end
+        else
+          @playgroundURL[p.name] = ""
+        end
+        unless @playgroundURL.has_key?(p.name)
+          @playgroundURL[p.name] = ""
+        end
+      else
+        puts "saving a non-alias URL for: " + p.name
+        @playgroundURL[p.name] = url1
+      end
+    end
+=end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @playgrounds, :callback => params[:callback]}
+      #format.json { render :json => { :playgrounds => @playgrounds, :playgroundURLs => @playgroundURL }, :callback => params[:callback]}
     end
   end
+  
+  def getPlacesURLforPlayground
+    # Find if there is google places page for raw name
+    @urlweb = ""
+    @urlweb = getURLtoGooglePlacePage(params[:name])
+    if @urlweb == ""
+      # Are there aliases?
+      playground = Playground.where("name = ?", params[:name]).first
+      if playground.aliases.count != 0 
+        playground.aliases.each do |a|
+          url2 = getURLtoGooglePlacePage(a.aliasname)
+          unless url2.nil?
+            @urlweb = url2
+          end
+        end
+      end
+    end
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @urlweb, :callback => params[:callback]}
+    end
+  end  
   
   def showpage
     @playgrounds = Playground.page(params[:page]).per(params[:numperpage])
@@ -70,7 +126,7 @@ class PlaygroundsController < ApplicationController
       placesresults = kdoc.fetch("result")
       if placesresults.has_key?("url")
         placespagehash[r.fetch("name")] = placesresults.fetch("url")
-        puts "Found a URL! Name:" + r.fetch("name") + " URL: " + placesresults.fetch("url")
+        #puts "Found a URL! Name:" + r.fetch("name") + " URL: " + placesresults.fetch("url")
       end
     end
     googresults.each do |r|
@@ -85,7 +141,7 @@ class PlaygroundsController < ApplicationController
           aliases.each do |a|
             if placespagehash.has_key?(a.aliasname)
               placespage = placespagehash[a.aliasname]
-              puts "Found a match url: " + placespage
+              #puts "Found a match url: " + placespage
             end
           end
         end
@@ -105,6 +161,40 @@ class PlaygroundsController < ApplicationController
     #returnhash = Hash.new
     #returnhash = {"dbplaygrounds" => playgroundresult, "googplaygrounds" => googresultsfound }
     return playgroundresult
+  end
+  
+  def getURLtoGooglePlacePage(name)
+    # Pass in a string of the park name, and get back a URL if there is a page,
+    # if not, get back a nil
+    # This is a multi-step process (according to the API docs):
+    # Step 1: Find the Google Places Search result
+    # Step 2: Get the reference key from it for the result you want
+    # Step 3: Do a Detailed search query, get the URL if one exists
+    url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.818860,-77.091497&radius=10000" + 
+    "&sensor=false&key=" + ENV['GPLACES_KEY'] + "&name=" + URI.escape(name)
+    placesurlbase = "https://maps.googleapis.com/maps/api/place/details/json?sensor=false&key=" +
+      ENV['GPLACES_KEY'] + "&reference="
+    url3 = ""
+    returninfo = postURLonly(url)
+    jdoc = JSON.parse(returninfo)
+    googresults = jdoc.fetch("results")
+    #puts "url: " + url
+    # are there even GPlaces results?
+    googresults.each do |r|
+      #puts "Fetch name is: " + r.fetch("name") + " Our DB name: " + name
+      next if r.fetch("name") != name
+      placesurl = placesurlbase +  r.fetch("reference")
+      #puts "Placesurl: " + placesurl
+      placesinfo = postURLonly(placesurl)
+      kdoc = JSON.parse(placesinfo)
+      placesresults = kdoc.fetch("result")
+      if placesresults.has_key?("url")
+        #puts "Found a url!! Returning: " + placesresults.fetch("url")
+        url3 = placesresults.fetch("url")
+        return url3
+      end
+    end
+    return ""
   end
 
   def addToGooglePlaces
