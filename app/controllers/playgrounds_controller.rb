@@ -37,7 +37,7 @@ class PlaygroundsController < ApplicationController
     # send back result set of playgrounds within that radius from the address - json dataset
     respond_to do |format|
       format.html # getPlaygrounds.html.erb
-      format.json { render :json => @playgroundset, :callback => params[:callback]}
+      format.json { render :json => @playgroundhash, :callback => params[:callback]}
     end
   end
 
