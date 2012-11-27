@@ -85,9 +85,9 @@ class PlaygroundsController < ApplicationController
     radius = 0
     if params[:radius].nil?
       # places API takes radius in meters - there are 3.28084 feet per meter
-      radius = (5280/2)/3.28084
+      radius = ((5280/2)/3.28084).floor
     else
-      radius = params[:radius].to_i/3.28084
+      radius = (params[:radius].to_i/3.28084).floor
     end
     usergeo = get_geo_from_google(params[:address])
     # geocode the address into lat long, and then make the web request to places
