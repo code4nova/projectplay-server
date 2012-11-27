@@ -91,21 +91,23 @@ class PlaygroundsController < ApplicationController
     end
     usergeo = get_geo_from_google(params[:address])
     # geocode the address into lat long, and then make the web request to places
-    @playgroundhash = showFromGooglePlaces(usergeo[:lat], usergeo[:long], radius)
+    @playgroundset = showFromGooglePlaces(usergeo[:lat], usergeo[:long], radius)
     #@playgroundset = @playgroundhash["playground"]
     #@urlset = @playgroundhash["placespage"]
     # send back result set of playgrounds within that radius from the address - json dataset
     respond_to do |format|
       format.html # getPlaygrounds.html.erb
-      format.json { render :json => @playgroundhash, :callback => params[:callback]}
+      format.json { render :json => @playgroundset, :callback => params[:callback]}
     end
   end
 
   def showFromGooglePlaces(lat, long, radius)
     if radius != 0
-      url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + lat.to_s + "," + long.to_s + "&radius=" + radius.to_s + "&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] 
+      url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat.to_s + "," +
+      long.to_s + "&radius=" + radius.to_s + "&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] 
     else
-      url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + lat.to_s + "," + long.to_s + "&rankby=distance&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] 
+      url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + lat.to_s + "," +
+      long.to_s + "&rankby=distance&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] 
     end
     # Request all playgrounds from Google Places under our API key that are radius from lat,long
     returninfo = postURLonly(url)
@@ -115,48 +117,45 @@ class PlaygroundsController < ApplicationController
     # jdoc is a result - so nested hashes would make googresults a hash
     googresults = jdoc.fetch("results")
     # Googresults is an array - each element should be one listing of Gplaces
+    # BUT, the results are paginated - so, we need to see if there are more than 20:
     # compare the results to what is in our database for the id
     playgroundresult = Array.new
     placesurl = ""
     placespage = ""
     placespagehash = Hash.new
-    googresults.each do |r|
-      # check if there is a Google Places URL for whatever this place is:
-      placesurl = "https://maps.googleapis.com/maps/api/place/details/json?reference=" +
-      r.fetch("reference") + "&sensor=true&key=" + ENV['GPLACES_KEY']
-      placesinfo = postURLonly(placesurl)
-      kdoc = JSON.parse(placesinfo)
-      #puts "Google Places Detail: " + kdoc.fetch("result").to_s
-      placesresults = kdoc.fetch("result")
-      if placesresults.has_key?("url")
-        placespagehash[r.fetch("name")] = placesresults.fetch("url")
-        #puts "Found a URL! Name:" + r.fetch("name") + " URL: " + placesresults.fetch("url")
-      end
-    end
+    # look against the results at least once
     googresults.each do |r|
       if Playground.where("name = ?", r.fetch("name")).first
         # This is a Playground Place in our database - now check against aliases
         currpg = Playground.where("name = ?", r.fetch("name")).first
-        placespage = ""
-        if placespagehash.has_key?(r.fetch("name"))
-           placespage = placespagehash[r.fetch("name")]
-        else
-          aliases = Alias.where("playground_id = ?", currpg.id)
-          aliases.each do |a|
-            if placespagehash.has_key?(a.aliasname)
-              placespage = placespagehash[a.aliasname]
-              #puts "Found a match url: " + placespage
-            end
-          end
+        playgroundresult.push(currpg)
+      end
+    end
+    i = 0
+    while jdoc.has_key?("next_page_token")
+      puts "There is a next page token, looking at next set of results now"
+      #url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + lat.to_s + "," +
+      #long.to_s + "&radius=" + radius.to_s + "&types=park&sensor=false&key=" + ENV['GPLACES_KEY'] +
+      #"&pagetoken=" + jdoc.fetch("next_page_token")
+      sleep(5)
+      url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=" +
+        URI.escape(jdoc.fetch("next_page_token").to_s) + "&key=" + ENV['GPLACES_KEY'] + "&location=" + lat.to_s + "," +
+        long.to_s + "&radius=" + radius.floor.to_s + "&types=park&sensor=false"
+      puts "url: " + url
+      returninfo = postURLonly(url)
+      jdoc = JSON.parse(returninfo)
+      googresults = jdoc.fetch("results")
+      puts returninfo.to_s
+      googresults.each do |r|
+        if Playground.where("name = ?", r.fetch("name")).first
+          # This is a Playground Place in our database - now check against aliases
+          currpg = Playground.where("name = ?", r.fetch("name")).first
+          playgroundresult.push(currpg)
         end
-        # Check that this playgroundresult isn't already in the array
-        unless playgroundresult.include?({ "playground" => Playground.where("name = ?", r.fetch("name")).first, "placespage" => placespage})
-        # The array is an array of hashes, first key is the Playground ActiveRecord object, second key
-        # is the URL returned from a Google Places Details query which should be the URL
-        # of the special Google Places page just for that park with all kinds of neat
-        # G+ user contributed content
-          playgroundresult.push({ "playground" => Playground.where("name = ?", r.fetch("name")).first, "placespage" => placespage})
-        end
+      end
+      if jdoc.has_key?("next_page_token")
+        puts "Jdoc still has a token, on page no: " + i.to_s
+        i = i+1
       end
     end
     # playgroundresult is an array of playground ActiveRecord objects - each one
