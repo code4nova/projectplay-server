@@ -67,7 +67,7 @@ class PlaygroundsController < ApplicationController
     end
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @urlweb, :callback => params[:callback]}
+      format.json { render :json => { :url => @urlweb}, :callback => params[:callback]}
     end
   end  
   
