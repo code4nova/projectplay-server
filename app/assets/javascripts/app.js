@@ -6,12 +6,15 @@ var playApp = function()
 		startLatLon: [38.818860, -77.091497],
 		startZoom: 13,
 	    logo: "/assets/aplays.png",
+	    //playUrl: "localhost:3000"
 	    playUrl: "http://projectplay.herokuapp.com/"
 	};
 
 	inst.lastCircle = null;
 	inst.addressCenterPoint = null;
 	inst.markers = [];
+	inst.lastSearchResults = [];
+	inst.mapToolTip = null;
 
 	inst.initialize = function() {
 		var mapCenter = new google.maps.LatLng(config.startLatLon[0], config.startLatLon[1]);
@@ -33,8 +36,25 @@ var playApp = function()
 			document.title = config.title;
 		}
 
+		$(app_listview).click(clickPgList);
+
 		initSidebar();
 		inst.svc = playSvc(config.playUrl);
+
+		inst.mapToolTip = new google.maps.InfoWindow();
+	};
+
+	var clickPgList = function(e) {
+		var target = e.target;
+
+		var limit = 5;
+		while (limit > 0 && target.tagName.toLowerCase() != "td") {
+			target = target.parentNode;
+			limit--;
+		}
+		//console.log(target);
+
+		renderDetailModal(target.id);
 	};
 
 	var initSidebar = function() {
@@ -48,64 +68,39 @@ var playApp = function()
 		$("#addressSearchBtn").click(
 			function() {
 				searchByAddress();
+				//searchByAddressWithPlacesApi();
 			}
 		);
 
-		/*$("#search").append("<div><input id='loc_auto' type='text' /></div>");
+		$("#app_listview").hide();
+		$("#app_pager").hide();
+	};
 
-		var input = document.getElementById('searchTextField');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-        autocomplete.bindTo('bounds', inst.map);
-        var infowindow = new google.maps.InfoWindow();
-        var marker = new google.maps.Marker({
-          map: inst.map
-        });
-
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {
-          infowindow.close();
-          var place = autocomplete.getPlace();
-          if (place.geometry.viewport) {
-            inst.map.fitBounds(place.geometry.viewport);
-          } else {
-            inst.map.setCenter(place.geometry.location);
-            inst.map.setZoom(17);  // Why 17? Because it looks good.
-          }
-
-          var image = new google.maps.MarkerImage(
-              place.icon,
-              new google.maps.Size(71, 71),
-              new google.maps.Point(0, 0),
-              new google.maps.Point(17, 34),
-              new google.maps.Size(35, 35));
-          marker.setIcon(image);
-          marker.setPosition(place.geometry.location);
-
-          var address = '';
-          if (place.address_components) {
-            address = [
-              (place.address_components[0] && place.address_components[0].short_name || ''),
-              (place.address_components[1] && place.address_components[1].short_name || ''),
-              (place.address_components[2] && place.address_components[2].short_name || '')
-            ].join(' ');
-          }
-
-          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-          infowindow.open(inst.map, marker);
-        });*/
+	var clearAll = function() {
+		clearCircle();
+		clearMarkers();
+		clearListView();
+		inst.lastSearchResults = [];	
 	};
 
 	var showAllPlaygrounds = function() {
-		clearCircle();
-		clearMarkers();
+		clearAll();
 		inst.svc.getAllPlaygrounds(function(data) { renderPlaygrounds(data); zoomToMarkerBounds();});
 	};
 
 	var searchByAddress = function() {
-		clearCircle();
-		clearMarkers();
+		clearAll();
 		var address = $('#inputAddress').val();
 		inst.svc.geoCodeAddress(address, function(data) { renderAddressSearch(data); });
-	}
+	};
+
+	var searchByAddressWithPlacesApi = function() {
+		clearAll();
+		var address = $('#inputAddress').val();
+		var dist = parseInt($('#inputDistance').val(), 10);
+		inst.svc.PlacesApiSearch(address, dist, function(data) { renderAddressApiSearch(data); });
+		inst.svc.geoCodeAddress(address, function(data) { renderSearchCircle(data); });
+	};
 
 	var renderAddressSearch = function(results) {
 		var pt = new google.maps.LatLng(results.geometry.location.lat(), results.geometry.location.lng());
@@ -119,7 +114,7 @@ var playApp = function()
 		inst.map.setCenter(pt);
 
 		var dist = parseInt($('#inputDistance').val(), 10);
-		console.log(dist);
+		//console.log(dist);
 		var circleOptions = {
 	      strokeColor: "#ff0000",
 	      strokeOpacity: 0.7,
@@ -133,7 +128,41 @@ var playApp = function()
 
 	    inst.lastCircle = new google.maps.Circle(circleOptions);
 	    inst.svc.getAllPlaygrounds(renderPlaygrounds);
-	}
+	};
+
+	var renderSearchCircle = function(results) {
+		var pt = new google.maps.LatLng(results.geometry.location.lat(), results.geometry.location.lng());
+		var name = results.formatted_address;
+		inst.addressCenterPoint = new google.maps.Marker({
+		            position: pt,
+		            map: inst.map,
+		            title: name,
+		            //icon: image
+		        });
+		inst.map.setCenter(pt);
+
+		var dist = parseInt($('#inputDistance').val(), 10);
+		//console.log(dist);
+		var circleOptions = {
+	      strokeColor: "#ff0000",
+	      strokeOpacity: 0.7,
+	      strokeWeight: 1,
+	      fillColor: "#00ff21",
+	      fillOpacity: 0.1,
+	      map: inst.map,
+	      center: pt,
+	      radius: dist * 1609.344
+	    };
+
+	    inst.lastCircle = new google.maps.Circle(circleOptions);
+	};
+
+	var renderAddressApiSearch = function(results) {
+		renderMarkers(results);
+		renderListView(results);
+		inst.lastSearchResults = results;
+	    //inst.svc.getAllPlaygrounds(renderPlaygrounds);
+	};
 
 	var clearMarkers = function() {
 	  for (var i = 0; i < inst.markers.length; i++ ) {
@@ -152,59 +181,232 @@ var playApp = function()
 		}
 	};
 
+	var clearListView = function() {
+		$('#listTbl').html("");
+		$('#app_pager').hide();
+	};
+
 	var renderPlaygrounds = function(playData) {
 		if (playData) {
+			var filteredList = [];
 			for (var i = 0; i < playData.length; i++) {
 				var playObj = playData[i];
 				//console.log(playObj);
 
-				var image = new google.maps.MarkerImage('/assets/playground_marker.png',
-						new google.maps.Size(32, 37), //icon size
-					    new google.maps.Point(0,0), //origin
-					    new google.maps.Point(16, 37) //offset
-					);
 				var pt = new google.maps.LatLng(playObj.lat, playObj.long);
-				
-				var addMarker = function() {
-					var marker = new google.maps.Marker({
-			            position: pt,
-			            map: inst.map,
-			            title: playObj.name,
-			            icon: image
-			        });
-			        inst.markers.push(marker);
-				}
-
 				if (inst.lastCircle) {
 					if (inst.lastCircle.contains(pt)) {
-						addMarker();
+						filteredList.push(playObj);
 					}
 				}
 				else {
-					addMarker();
+					filteredList.push(playObj);
 				}
 			}
+			inst.lastSearchResults = filteredList;
+			renderMarkers(filteredList);
+			renderListView(filteredList);
 		}
+	};
+
+	inst.clickPgMarker = function(id) {
+		renderDetailModal(id);
+	};
+
+	var renderDetailModal = function(id) {
+		for (var i = 0; i < inst.lastSearchResults.length; i++) {
+			var result = inst.lastSearchResults[i];
+
+			if (id == result.id) {
+				//console.log(result);
+
+				//title
+				$('#detail_title').empty();
+				$('#detail_title').append(result.name);
+
+				//age level
+				$('#detail_agelevel_text').empty();
+				$('#detail_agelevel_text').append(result.agelevel);
+
+				//restrooms
+				$('#detail_restrooms').empty();
+				if (result.restrooms == 1) {
+					$('#detail_restrooms').append('None.');
+				} 
+				else if (result.restrooms == 2) {
+					$('#detail_restrooms').append('Inadequate.');
+				}
+				else if (result.restrooms == 3) {
+					$('#detail_restrooms').append('Plenty.');
+				}
+
+				//drinking fountain
+				$('#detail_drinkingfountain').empty();
+				if (result.drinkingw == 1) {
+					$('#detail_drinkingfountain').append('None.');
+				}
+				else if (result.drinkingw == 2) {
+					$('#detail_drinkingfountain').append('Limited.');
+				}
+				else if (result.drinkingw == 3) {
+					$('#detail_drinkingfountain').append('As much as you want.');
+				}
+
+				//seating
+				$('#detail_seating').empty();
+				if (result.seating == 1) {
+					$('#detail_seating').append('Little to no seating.');
+				}
+				else if (result.seating == 2) {
+					$('#detail_seating').append('Inadequate.');
+				}
+				else if (result.seating == 3) {
+					$('#detail_seating').append('Adequate.');
+				}
+
+				//comments
+				$('#detail_comments_text').empty();
+				$('#detail_comments_text').append(result.generalcomments);
+
+				//get google places url
+				$('#detail_googleplacelink').empty();
+				$('#detail_googleplacelink').append('loading...');
+				var placesURL = inst.svc.getPlaceUrl(result.name,
+					function(json) {
+						//console.log(json.url);
+						if (json.url) {
+							$('#detail_googleplacelink').empty();
+							$('#detail_googleplacelink').append("<a href=" + json.url + " target='new'>Click Here.</a>");
+						}
+						else {
+							$('#detail_googleplacelink').empty();
+							$('#detail_googleplacelink').append("N/A");
+						}
+						
+					}
+				);
+			}
+		}
+
+		$('#app_detail_modal').modal();
+
 	};
 
 	var zoomToMarkerBounds = function() {
 		var bounds = new google.maps.LatLngBounds();
 		var extent = [];
 		for (var i = 0; i < inst.markers.length; i++ ) {
-	    	//console.log(inst.markers[i]);
-	    	//extent.push(inst.markers[i].position.Ya, inst.markers[i].position.Za);
 	    	bounds.extend(inst.markers[i].position);
 	    }
 	    
 	    inst.map.fitBounds(bounds);
-	    var listener = google.maps.event.addListener(inst.map, "idle", function() { 
-		  if (inst.map.getZoom() > 16) inst.map.setZoom(16); 
-		  google.maps.event.removeListener(listener); 
-		});
+	};
+
+	var renderMarkers = function(list) {
+		for (var i = 0; i < list.length; i++) {
+			var playObj = list[i];
+
+			var image = new google.maps.MarkerImage('/assets/playground_marker.png',
+						new google.maps.Size(32, 37), //icon size
+					    new google.maps.Point(0,0), //origin
+					    new google.maps.Point(16, 37) //offset
+					);
+			var pt = new google.maps.LatLng(playObj.lat, playObj.long);
+			
+			var addMarker = function() {
+				var marker = new google.maps.Marker({
+		            id: playObj.id,
+		            position: pt,
+		            map: inst.map,
+		            name: playObj.name,
+		            icon: image
+		        });
+		        //marker.set("id", playObj.id);
+		        inst.markers.push(marker);
+		        
+		        google.maps.event.addListener(marker, 'click', 
+		        		function (e) {
+		        			inst.clickPgMarker(marker.id);
+		        		}
+		        );
+
+		        google.maps.event.addListener(marker, "mouseover", function(event) {
+                	this.setIcon('/assets/playground_marker_green.png');
+                	$('#' + this.id).css('background-color', '#aedd52');
+
+                	inst.mapToolTip.setContent('<p><strong>' + this.name + '</strong></p>');
+                	inst.mapToolTip.open(inst.map, this);
+                });
+
+                google.maps.event.addListener(marker, "mouseout", function(event) {
+                	this.setIcon('/assets/playground_marker.png');
+                	$('#' + this.id).css('background-color', '');
+                	inst.mapToolTip.close();
+                });
+			}
+
+			addMarker();
+		}
+	};
+
+	var renderListView = function(list) {
+		if (list.length > 0) 
+		{
+			$("#app_listview").show();
+			$("#app_pager").show();
+			for (var i = 0; i < list.length; i++) {
+				var listItem = list[i];
+				var builder = [];
+				builder.push("<tr>");
+				builder.push("	<td ");
+				builder.push(" id='");
+				builder.push(listItem.id);
+				builder.push("' ");
+				builder.push(" class='listViewRow'>");
+				builder.push("		<strong>" + listItem.name + "</strong>");
+				builder.push("		<i class='icon-info-sign right'></i>");
+				builder.push("  </td>");
+				builder.push("</tr>");
+				$('#listTbl').append(builder.join(""));
+			}
+
+			inst.rightSizeListView();
+			$('.listViewRow').hover(
+				function() {
+					$(this).css('background-color', '#aedd52');
+					for (var i = 0; i < inst.markers.length; i++) {
+						var m = inst.markers[i];
+						if (m.id == this.id) {
+							m.setIcon('/assets/playground_marker_green.png');
+							inst.mapToolTip.setContent('<p><strong>' + m.name + '</strong></p>');
+                			inst.mapToolTip.open(inst.map, m);
+						}
+					}
+				},
+				function() {
+					$(this).css('background-color', '');
+					for (var i = 0; i < inst.markers.length; i++) {
+						var m = inst.markers[i];
+						if (m.id == this.id) {
+							m.setIcon('/assets/playground_marker.png');
+							inst.mapToolTip.close();
+						}
+					}
+				}
+			);
+
+		} 
+	};
+
+	inst.rightSizeListView = function() {
+		var h = $(window).height();
+		$("#app_listview").css("height",  h - 290 + "px");
 	};
 
 	return inst;
 };
+
+
 
 
 

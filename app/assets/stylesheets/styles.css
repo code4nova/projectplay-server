@@ -56,8 +56,50 @@ html {
 	margin: 5px 10px 5px 10px;
 }
 
-  hr.hr4 {
-      border-top: 1px dotted #22ad29;
-      border-bottom: 1px dotted #22ad29;
-      height: 2px;
-    }
+hr.fancydivider {
+  border-top: 1px dotted #22ad29;
+  border-bottom: 1px dotted #22ad29;
+  height: 2px;
+}
+
+#app_listview {
+	height: 300px;
+	overflow: auto;
+}
+
+#app_listview::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 11px;
+    height: 11px;
+}
+
+#app_listview::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; /* should match background, can't be transparent */
+    background-color: #E1E1E1;
+}
+
+#app_listview::-webkit-scrollbar-track { 
+	background-color: #FFF; 
+	border-radius: 8px; 
+}
+
+#listTbl {
+	background-color: #ffffff;
+}
+
+#listTbl td {
+	cursor: pointer;
+}
+
+.pagination.center,
+.pagination.center ul {
+    float: left;
+    position: relative;
+}
+.pagination.center { left: 50%; }
+.pagination.center ul { left: -50%; }
+
+i.right {
+	float: right;
+}

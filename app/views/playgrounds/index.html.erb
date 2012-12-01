@@ -1,25 +1,72 @@
-<div id="side_bar">
-	<div id="branding">
-		<%= image_tag("projectplay.png", :id => "header_img") %>
-		<div id="header_bar"></div>
-		<div id="overhang_bar"></div>
-	</div>
-	<div id="app_panel">
-		<a id='showAllBtn' class='btn btn-block btn-medium'>Show All Playgrounds <i class="icon-chevron-right"></i></a>
-		<hr class='hr4' /> 
-		<div class="input-append">
-			<input id="inputAddress" placeholder="Type your address..." size="16" type="text">
-			<button id="addressSearchBtn" class="btn" type="button">Go</button>
+<div id="app_detail_modal" class="modal hide fade">
+			<div id="detail_header" class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 id='detail_title'></h3>
+			</div>
+			<div class="modal-body">
+				<p>Google Places Page: <span id='detail_googleplacelink'></span></p>
+				<p>Restrooms: <span id='detail_restrooms'></span></p>
+				<p>Drinking Fountains: <span id='detail_drinkingfountain'></span></p>
+				<p>Seating: <span id='detail_seating'></span></p>
+				<p>Age Groups: <span id="detail_agelevel_text"></span></p>
+				<p>Comments: <span id="detail_comments_text"></span></p>
+				<!--<table>
+					<tr>
+						<td id='detail_comments_label'>Comments:</td>
+						<td id='detail_comments_text'></td>
+					</tr>
+				</table>-->
+			</div>
+			<!--
+			<div class="modal-footer">
+				<a href="#" class="btn">Close</a>
+			</div>
+		    -->
 		</div>
-		<span class="sbtext">Within</span>
-		<select id="inputDistance" class='input-mini'>
-			<option>1</option>
-			<option>2</option>
-			<option>3</option>
-			<option>4</option>
-			<option>5</option>
-		</select>
-		<span class="sbtext">mile(s) of my location</span>
-	</div>
-</div>
-<div id="map_canvas"></div>
+
+		<div id="side_bar">
+			<div id="branding">
+				<img id="header_img" src="./img/projectplay.png" />
+				<div id="header_bar"></div>
+				<div id="overhang_bar"></div>
+			</div>
+			<div id="app_panel">
+				<a id='showAllBtn' class='btn btn-block btn-medium'>Show All Playgrounds <i class="icon-chevron-right"></i></a>
+				<hr class="fancydivider" /> 
+				<div class="input-append">
+				  <input id="inputAddress" placeholder="Type your address..." size="16" type="text">
+				  <button id="addressSearchBtn" class="btn" type="button">Go</button>
+				</div>
+
+				<span class="sbtext">Within</span>
+				<select id="inputDistance" class='input-mini'>
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				</select>
+				<span class="sbtext">mile(s) of my location</span>
+
+				<hr class="fancydivider" />
+				
+				<div id="app_listview">
+					<table id="listTbl" class="table table-bordered table-striped">
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+				<!--<div id="app_pager" class="pagination center">
+						<ul>
+						    <li><a href="#">Prev</a></li>
+						    <li><a href="#">1</a></li>
+						    <li><a href="#">2</a></li>
+						    <li><a href="#">3</a></li>
+						    <li><a href="#">4</a></li>
+						    <li><a href="#">Next</a></li>
+					  	</ul>
+				</div>-->
+
+			</div>
+		</div>
+		<div id="map_canvas"></div>

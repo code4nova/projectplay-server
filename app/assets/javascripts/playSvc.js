@@ -34,6 +34,45 @@ var playSvc = function(url) {
 		);
 	};
 
+	inst.getPlaceUrl = function(name, callback) {
+		var caller =  callback;
+
+		var getPlaceUrl = inst.baseUrl + 'playgrounds/getPlacesURLforPlayground.json?name=' + encodeURI(name);
+		$.ajax({
+		   type: 'GET',
+		    url: getPlaceUrl,
+		    async: false,
+			contentType: 'application/json',
+			dataType: 'jsonp',
+		    success: function(json) {
+				caller.apply(null, [json]);
+		    },
+		    error: function(e) {
+		       caller.apply(null, [false]);
+		    }
+		});
+	};
+
+	inst.PlacesApiSearch = function(address, radius, callback) {
+		var caller = callback;
+		var dist = radius * 5280;
+
+		var placesSearchUrl = inst.baseUrl + 'playgrounds/getPlaygrounds.json?radius=' + dist + '&address=' + encodeURI(address);
+		$.ajax({
+		   type: 'GET',
+		    url: placesSearchUrl,
+		    async: false,
+			contentType: 'application/json',
+			dataType: 'jsonp',
+		    success: function(json) {
+				caller.apply(null, [json]);
+		    },
+		    error: function(e) {
+		       caller.apply(null, [false]);
+		    }
+		});
+	};
+
 	return inst;
 };
 
