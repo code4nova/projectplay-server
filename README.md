@@ -1,7 +1,7 @@
 ## Setup
 
-### Install dependencies
-`bundle install`
+### Install dependencies - here without production gem requirements (for a development setup)
+`bundle install --without production`
 
 ### Configure database
 `bundle exec rake db:migrate`
