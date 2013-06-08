@@ -6,11 +6,8 @@
 ### Configure database
 `bundle exec rake db:migrate`
 
-### Load data
-`bundle exec rake db:seed`
-
-### Refresh data per new measurements/values of 9/19/2012
-`bundle exec rake db:datarefresh`
+### Load data per new measurements/values of 9/19/2012
+`bundle exec rake db:newdataseed`
 
 ### Start server
 `rails server`
