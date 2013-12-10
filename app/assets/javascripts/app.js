@@ -273,7 +273,12 @@ var playApp = function()
 				// of just having the Google Local URL in our database
 				// Below, the old Places API code is commented out
 				$('#detail_googleplacelink').empty();
-				$('#detail_googleplacelink').append('<a href="' + result.google_placesid + '">Google Local Link</a>');
+				if(result.google_placesid == '') {
+					$('#detail_googleplacelink').append('No Additional Info Available');
+				}
+				else {
+				$('#detail_googleplacelink').append('<a href="' + result.google_placesid + '">More Info</a>');
+				}
 				//var placesURL = inst.svc.getPlaceUrl(result.name,
 				//	function(json) {
 						//console.log(json.url);
