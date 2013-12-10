@@ -84,6 +84,7 @@ class PlaygroundsController < ApplicationController
 # GET /playgrounds/nearaddy/:address
 # Uses geo-kit
   def nearaddy
+=begin
     @playgrounds = "hello! You sent" + params[:address]
     respond_to do |format|
       format.html 
@@ -91,14 +92,11 @@ class PlaygroundsController < ApplicationController
       format.json { render :json => { :origin => origin, :playgrounds => @playgrounds } }
       format.text { render :text => @playgrounds }
     end
-=begin
+=end
     usergeo = get_geo_from_google(params[:address])
     origin = [usergeo[:lat], usergeo[:long]]
-    @playgrounds = Playground.find :all,
-                              :origin => origin,
-                              #:order => 'distance',
-                              :within => 1,
-                              :limit => 5
+    @playgrounds = Playground.near(:origin => origin,
+                              :within => '1').order("distance ASC").limit(5)
     @count = 1
     # populates the instance variable rt array of hashes with the distance and unit for each retailer returned in the retailer collection
     @rt = Array.new
@@ -108,9 +106,8 @@ class PlaygroundsController < ApplicationController
       format.html 
       format.xml  { render :xml => @playgrounds }
       format.json { render :json => { :origin => origin, :playgrounds => @playgrounds } }
-      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "#{i+1} (#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name}\n#{r.text_address}"}.join("\n\n")}
+      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "#{i+1} (#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name}\n"}.join("\n\n")}
     end
-=end
   end
 
 def get_geo_from_google(address)
