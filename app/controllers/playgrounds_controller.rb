@@ -79,6 +79,59 @@ class PlaygroundsController < ApplicationController
       format.json { render :json => @playgrounds, :callback => params[:callback]}
     end
   end
+
+# Code that Tropo calls out to for SMS playground listing
+# GET /playgrounds/nearaddy/:address
+# Uses geo-kit
+  def nearaddy
+    usergeo = get_geo_from_google(params[:address])
+    origin = [usergeo[:lat], usergeo[:long]]
+    @playgrounds = Playground.find :all,
+                              :origin => origin,
+                              #:order => 'distance',
+                              :within => 1,
+                              :limit => 5
+    @count = 1
+    # populates the instance variable rt array of hashes with the distance and unit for each retailer returned in the retailer collection
+    @rt = Array.new
+    @playgrounds.each_with_index do |r, ind|
+      @rt[ind] = { :dist => r.distancefromorigin(origin)[:dist], :unit => r.distancefromorigin(origin)[:unit] }    end
+    respond_to do |format|
+      format.html 
+      format.xml  { render :xml => @playgrounds }
+      format.json { render :json => { :origin => origin, :playgrounds => @playgrounds } }
+      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "#{i+1} (#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name}\n#{r.text_address}"}.join("\n\n")}
+    end
+  end
+
+def get_geo_from_google(address)
+   geocoder = "http://maps.googleapis.com/maps/api/geocode/json?address="
+    output = "&sensor=false"
+    #address = "424+ellis+st+san+francisco"
+    # replace any ampersands with "and" since ampersands don't seem to work with the google query
+    address =  address.sub( "&", "and" )
+    request = geocoder + address.tr(' ', '+') + output
+    url = URI.escape(request)
+    resp = Net::HTTP.get_response(URI.parse(url))
+    #parse result if result received properly
+    if resp.is_a?(Net::HTTPSuccess)
+      #parse the json
+      parse = Crack::JSON.parse(resp.body)
+      #check if google went well
+      if parse["status"] == "OK"
+       # return parse if raw == true
+        parse["results"].each do |result|
+          geo_hash = {  :lat => result["geometry"]["location"]["lat"],
+                        :long => result["geometry"]["location"]["lng"]
+          }
+          return geo_hash
+        end
+     end
+    end
+
+    return parse 
+  end
+
   
   def getPlaygrounds
     # from params[:address] params[:radius in feet]

@@ -7,7 +7,7 @@ var playApp = function()
 		startZoom: 13,
 	    logo: "/assets/aplays.png",
 	    //playUrl: "localhost:3000"
-	    playUrl: "http://projectplay.herokuapp.com/"
+	    playUrl: "http://alexandriaplays.codefornova.org/"
 	};
 
 	inst.lastCircle = null;

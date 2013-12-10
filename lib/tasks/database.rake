@@ -135,4 +135,44 @@ namespace :db do
         puts "done seeding criteriakeys table"
     end
 
+    desc "Rake Task to Do complete data upload assuming IDs in place"
+    task :nudatarefresh => :environment do
+        # Update fields in Playgrounds table for new data
+        CSV.foreach (Rails.root.to_s + '/db/SeedData12_2013.csv') do |row|
+            next if row[0] == "Id"
+            puts "Updating Playground: " + row[1].to_s
+            currpg = Playground.where(:id => row[0].to_s).first
+            currpg.name = row[1]
+            currpg.mapid = row[2]
+            currpg.agelevel = row[3]
+	    currpg.totplay = row[4]
+            currpg.opentopublic = row[5]
+	    currpg.invitation = row[6]
+            currpg.howtogetthere = row[7]
+            currpg.safelocation = row[8]
+            currpg.shade = row[9]
+            currpg.monitoring = row[10]
+            currpg.programming = row[11]
+            currpg.weather = row[12]
+            currpg.seating = row[13]
+            currpg.restrooms = row[14]
+            currpg.drinkingw = row[15]
+            currpg.activeplay = row[16]
+            currpg.socialplay = row[17]
+            currpg.creativeplay = row[18]
+            currpg.naturualen = row[19]
+            currpg.freeplay = row[20]
+            currpg.specificcomments = row[21]
+            currpg.generalcomments = row[22]
+            currpg.compsum = row[23]
+            currpg.modsum = row[24]
+            currpg.graspvalue = row[25]
+            currpg.playclass = row[26]
+            currpg.subarea = row[27]
+            currpg.lat = row[30]
+            currpg.long = row[31]
+            currpg.google_placesid = row[32]
+            currpg.save
+        end
+     end
 end

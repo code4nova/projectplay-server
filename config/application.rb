@@ -60,3 +60,10 @@ module Projectplay
     config.assets.version = '1.0'
   end
 end
+
+module ActiveRecord
+module SpawnMethods
+VALID_FIND_OPTIONS = [ :conditions, :include, :joins, :limit, :offset, :extend,
+:order, :select, :readonly, :group, :having, :from, :lock, :origin, :within ]
+end
+end

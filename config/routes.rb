@@ -13,6 +13,7 @@ Projectplay::Application.routes.draw do
 
   resources :playgrounds do
     collection do
+      get "nearaddy"
       get :addToGooglePlaces
       get 'page(.:format)/:page/:numperpage', :action => :showpage
       get "showpage"
