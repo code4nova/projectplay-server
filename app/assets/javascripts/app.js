@@ -269,22 +269,25 @@ var playApp = function()
 				$('#detail_comments_text').append(result.generalcomments);
 
 				//get google places url
+				// Updated Dec 2013 to remove use of Google Places URI in place
+				// of just having the Google Local URL in our database
+				// Below, the old Places API code is commented out
 				$('#detail_googleplacelink').empty();
-				$('#detail_googleplacelink').append('loading...');
-				var placesURL = inst.svc.getPlaceUrl(result.name,
-					function(json) {
+				$('#detail_googleplacelink').append('<a href="' + result.google_placesid + '">Google Local Link</a>');
+				//var placesURL = inst.svc.getPlaceUrl(result.name,
+				//	function(json) {
 						//console.log(json.url);
-						if (json.url) {
-							$('#detail_googleplacelink').empty();
-							$('#detail_googleplacelink').append("<a href=" + json.url + " target='new'>Click Here.</a>");
-						}
-						else {
-							$('#detail_googleplacelink').empty();
-							$('#detail_googleplacelink').append("N/A");
-						}
-						
-					}
-				);
+				//		if (json.url) {
+				//			$('#detail_googleplacelink').empty();
+				//			$('#detail_googleplacelink').append("<a href=" + json.url + " target='new'>Click Here.</a>");
+				//		}
+				//		else {
+				//			$('#detail_googleplacelink').empty();
+				//			$('#detail_googleplacelink').append("N/A");
+				//		}
+				//		
+				//	}
+				//);
 			}
 		}
 
