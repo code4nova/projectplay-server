@@ -9,6 +9,8 @@ gem 'fastercsv'
 gem 'rake', '0.8.7'
 gem 'spreadsheet'
 gem 'kaminari'
+gem 'geokit'
+gem 'geokit-rails'
 
 group :development, :test do
 	gem 'sqlite3'
@@ -53,3 +55,4 @@ gem 'heroku'
 
 
 gem "devise"
+gem "cancan"
