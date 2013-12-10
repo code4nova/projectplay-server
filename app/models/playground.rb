@@ -22,7 +22,7 @@ class Playground < ActiveRecord::Base
                           :conditions => %(
                             (ACOS(COS(#{origin_lat})*COS(#{origin_lng})*COS(RADIANS(playgrounds.lat))*COS(RADIANS(playgrounds.long))+
                             COS(#{origin_lat})*SIN(#{origin_lng})*COS(RADIANS(playgrounds.lat))*SIN(RADIANS(playgrounds.long))+
-                            SIN(#{origin_lat})*SIN(RADIANS(playgrounds.lat)))*3963) <= #{within}
+                            SIN(#{origin_lat})*SIN(RADIANS(playgrounds.lat)))*3963) <= 1
                           ),
                           :select => %( playgrounds.*,
                             (ACOS(COS(#{origin_lat})*COS(#{origin_lng})*COS(RADIANS(playgrounds.lat))*COS(RADIANS(playgrounds.long))+

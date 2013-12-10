@@ -6,38 +6,6 @@ class PlaygroundsController < ApplicationController
   def index
     @playgrounds = Playground.all
     @playgroundURL = Hash.new
-    # For every playground in the database, get a Places Page URL if one exists
-    # The best primaryish key I can find is basically the playground name
-    # But, because there could be different spellings/variances, we also search
-    # against the Aliases relation for each Playground listing
-=begin   
-    @playgrounds.each do |p|
-      # If we don't get a URL from the actual name, then hit the aliases
-      url1 = getURLtoGooglePlacePage(p.name)
-      if url1 != ""
-        puts "Found a URL w/o alias: " + url1
-      end
-      if url1 == ""
-        if p.aliases.count != 0 
-          p.aliases.each do |a|
-            url2 = getURLtoGooglePlacePage(a.aliasname)
-            unless url2.nil?
-              puts "Saving an alias URL for: " + p.name
-              @playgroundURL[p.name] = url2
-            end
-          end
-        else
-          @playgroundURL[p.name] = ""
-        end
-        unless @playgroundURL.has_key?(p.name)
-          @playgroundURL[p.name] = ""
-        end
-      else
-        puts "saving a non-alias URL for: " + p.name
-        @playgroundURL[p.name] = url1
-      end
-    end
-=end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @playgrounds, :callback => params[:callback]}
@@ -84,19 +52,12 @@ class PlaygroundsController < ApplicationController
 # GET /playgrounds/nearaddy/:address
 # Uses geo-kit
   def nearaddy
-=begin
-    @playgrounds = "hello! You sent" + params[:address]
-    respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @playgrounds }
-      format.json { render :json => { :origin => origin, :playgrounds => @playgrounds } }
-      format.text { render :text => @playgrounds }
-    end
-=end
     usergeo = get_geo_from_google(params[:address])
     origin = [usergeo[:lat], usergeo[:long]]
+    # Although within is specified here as a param, the model code didn't format it right, so a within distance of 1 mile is hardcoded in
+    # the model.
     @playgrounds = Playground.near(:origin => origin,
-                              :within => '1').order("distance ASC").limit(5)
+                              :within => 1).order("distance ASC").limit(5)
     @count = 1
     # populates the instance variable rt array of hashes with the distance and unit for each retailer returned in the retailer collection
     @rt = Array.new
@@ -106,7 +67,7 @@ class PlaygroundsController < ApplicationController
       format.html 
       format.xml  { render :xml => @playgrounds }
       format.json { render :json => { :origin => origin, :playgrounds => @playgrounds } }
-      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "#{i+1} (#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name}\n"}.join("\n\n")}
+      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "(#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name}"}.join("\n")}
     end
   end
 
