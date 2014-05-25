@@ -67,7 +67,7 @@ class PlaygroundsController < ApplicationController
       format.html 
       format.xml  { render :xml => @playgrounds }
       format.json { render :json => { :origin => origin, :playgrounds => @playgrounds } }
-      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "(#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name}"}.join("\n")}
+      format.text { render :text => @playgrounds.to_enum(:each_with_index).map{|r, i| r.name = "(#{@rt[i][:dist]} #{@rt[i][:unit]}): #{r.name} http://maps.google.com/maps?q=@#{r.lat},#{r.long}"}.join("\n")}
     end
   end
 
