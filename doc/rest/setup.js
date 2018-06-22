@@ -1,3 +1,4 @@
+// Install https://marketplace.visualstudio.com/items?itemName=humao.rest-client extension to vscode
 // Do command + , and paste these settings there
 var settings = {
 	"rest-client.environmentVariables": {
