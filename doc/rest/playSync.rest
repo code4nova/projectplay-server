@@ -1,0 +1,22 @@
+# variables
+### getAllPlaygrounds
+GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=? HTTP/1.1
+contentType: application/json
+
+### PlacesApiSearch
+# filter server side by location, not currently being used
+@dist=.25
+@encodeURIaddress=Alexandria,%20VA,%20USA
+
+GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=?radius={{dist}}&address={{encodeURIaddress}} HTTP/1.1
+contentType: application/json
+
+# geography variables
+
+@lat=38.803021
+@long=-77.043672
+### should have
+GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=?radius={{dist}}&lat={{lat}}&long={{long}} HTTP/1.1
+contentType: application/json
+
+#
