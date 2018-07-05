@@ -13,9 +13,15 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+schema.rb
 
 #Ignore Vagrant config
 .vagrant
 
 #Ignore Gem lock files
 Gemfile.lock 
+
+#Ignore generated docs
+doc/app
+
+.DS_Store
