@@ -43,6 +43,11 @@ def add_user():
 
     return jsonify(new_user)
 
+@app.route("/playgrounds.json?callback=?", methods=["GET"])
+def get_users():
+    all_users = User.query.all()
+    result = users_schema.dump(all_users)
+    return jsonify(result.data)
 
 # endpoint to show all users
 @app.route("/user", methods=["GET"])
