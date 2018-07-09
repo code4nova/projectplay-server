@@ -8,6 +8,9 @@ from flask import abort
 import maya
 import json
 import os
+import math
+# import dictutil
+# func = dictutil.func
 
 user_schema = UserSchema()
 playground_schema = PlaygroundSchema()
@@ -50,8 +53,30 @@ def get_playgrounds_callback():
 		if set(['radius', 'lat','long']) <= set(request.args):
 		# if request.args.get('radius', type = int) & request.args.get('lat', type = int) & request.args.get('long', type = int):
 # radius={{dist}}&lat={{lat}}&long={{long}}
+			radius = request.args.get('radius', type = float)
+			loc_latitude = request.args.get('lat', type = float)
+			loc_longitude = request.args.get('long', type = float)
+			# return jsonify([radius,loc_latitude,loc_longitude])
+			# q = session.query(Playground).from_statement(
+			# 'SELECT * FROM playgrounds WHERE acos(sin(1.3963) * sin(Lat) + '\
+			# 'cos(1.3963) * cos(Lat) * cos(Lon - (-0.6981))) * 6371 <= 60;')
+			# nearbyplaygrounds = Playground.query.filter(math.acos(math.sin(math.radians(loc_latitude)) * math.sin(math.radians(Playground.lat)) + math.cos(math.radians(loc_latitude)) * math.cos(math.radians(Playground.lat)) * math.cos(math.radians(Playground.long) - (math.radians(loc_longitude)))) * 6371 <= radius)
+			# result = playgrounds_schema.dump(nearbyplaygrounds)
 			
-			
+			# return jsonify(math.acos(math.sin(math.radians(loc_latitude))))
+
+			# return jsonify(math.sin(math.radians(Playground.lat))) not working
+			return jsonify(math.cos(math.radians(loc_latitude)))
+			# return jsonify(math.cos(math.radians(Playground.lat))) 
+			# return jsonify(math.cos(math.radians(Playground.long)))
+			return jsonify(math.radians(loc_longitude))
+			#  * 6371 <= 100)
+
+			nearbyplaygrounds = Playground.query.filter(math.acos(math.sin(math.radians(loc_latitude)) * math.sin(math.radians(Playground.lat)) + math.cos(math.radians(loc_latitude)) * math.cos(math.radians(Playground.lat)) * math.cos(math.radians(Playground.long) - (math.radians(loc_longitude)))) * 6371 <= 100)
+			result = playgrounds_schema.dump(nearbyplaygrounds)
+
+			return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+
 			return "error"
 		else:
 			all_playgrounds = Playground.query.all()
