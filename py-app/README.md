@@ -32,6 +32,10 @@ $ python
 >>> quit()
 ```
 
+## Seeder
+
+* `python3 seeder` make sure to rename `id` column to `playid` or something else
+
 ## Updating dependencies
 
 ```bash
