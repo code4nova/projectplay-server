@@ -11,6 +11,7 @@
 /db/*.sqlite3
 *sqlite
 *sqlite3
+*db
 __pycache__
 
 # Ignore all logfiles and tempfiles.
