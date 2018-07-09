@@ -10,6 +10,7 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 *sqlite
+*sqlite3
 __pycache__
 
 # Ignore all logfiles and tempfiles.
