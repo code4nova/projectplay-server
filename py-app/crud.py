@@ -30,7 +30,14 @@ class UserSchema(ma.Schema):
         # Fields to expose
         fields = ('username', 'email')
 
+class PlaygroundSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('id', 'name', 'mapid', 'agelevel', 'totplay', 'opentopublic', 'invitation', 'howtogetthere', 'safelocation', 'shade', 'monitoring', 'programming', 'weather', 'seating', 'restrooms', 'drinkingw', 'activeplay', 'socialplay', 'creativeplay', 'naturualen', 'freeplay', 'specificcomments', 'generalcomments', 'compsum', 'modsum', 'graspvalue', 'playclass', 'subarea', 'created_at', 'updated_at', 'lat', 'long')
+    
+
 class Playground(db.Model):
+    __tablename__ = 'playgrounds'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
     mapid = db.Column(db.Integer)
@@ -48,7 +55,7 @@ class Playground(db.Model):
     restrooms = db.Column(db.Integer)
     drinkingw = db.Column(db.Integer)
     activeplay = db.Column(db.Integer)
-    socialdom = db.Column(db.Integer)
+    socialplay = db.Column(db.Integer)
     creativeplay = db.Column(db.Integer)
     naturualen = db.Column(db.Integer)
     freeplay = db.Column(db.Integer)
@@ -66,6 +73,8 @@ class Playground(db.Model):
 
 
 user_schema = UserSchema()
+playground_schema = PlaygroundSchema()
+playgrounds_schema = PlaygroundSchema(many=True)
 users_schema = UserSchema(many=True)
 
 @app.before_request
@@ -96,12 +105,13 @@ def add_user():
 
     return jsonify(new_user)
 
+ ## result = all_playgrounds.dump
 # ?callback=?
 @app.route("/playgrounds.json", methods=["GET"])
 def get_playgrounds_callback():
 	if request.args.get('callback') == '?':
-		all_users = User.query.all()
-		result = users_schema.dump(all_users)
+		all_playgrounds = Playground.query.all()
+		result = playgrounds_schema.dump(all_playgrounds)
 		return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
 	else:
 		abort(404)
