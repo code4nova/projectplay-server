@@ -8,7 +8,9 @@ import os
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'crud.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'development.sqlite3')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'crud.sqlite')
+
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
@@ -27,6 +29,40 @@ class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ('username', 'email')
+
+class Playground(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    mapid = db.Column(db.Integer)
+    agelevel = db.Column(db.String(255))
+    totplay = db.Column(db.Integer)
+    opentopublic = db.Column(db.Integer)
+    invitation = db.Column(db.Integer)
+    howtogetthere = db.Column(db.Integer)
+    safelocation = db.Column(db.Integer)
+    shade = db.Column(db.Integer)
+    monitoring = db.Column(db.Integer)
+    programming = db.Column(db.Integer)
+    weather = db.Column(db.Integer)
+    seating = db.Column(db.Integer)
+    restrooms = db.Column(db.Integer)
+    drinkingw = db.Column(db.Integer)
+    activeplay = db.Column(db.Integer)
+    socialdom = db.Column(db.Integer)
+    creativeplay = db.Column(db.Integer)
+    naturualen = db.Column(db.Integer)
+    freeplay = db.Column(db.Integer)
+    specificcomments = db.Column(db.Text)
+    generalcomments = db.Column(db.Text)
+    compsum = db.Column(db.Integer)
+    modsum = db.Column(db.Integer)
+    graspvalue = db.Column(db.Integer)
+    playclass = db.Column(db.String(255))
+    subarea = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
+    lat = db.Column(db.Float)
+    long = db.Column(db.Float)
 
 
 user_schema = UserSchema()
