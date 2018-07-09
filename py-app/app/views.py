@@ -66,16 +66,16 @@ def get_playgrounds_callback():
 			# return jsonify(math.acos(math.sin(math.radians(loc_latitude))))
 
 			# return jsonify(math.sin(math.radians(Playground.lat))) not working
-			return jsonify(math.cos(math.radians(loc_latitude)))
+			# return jsonify(math.cos(math.radians(loc_latitude)))
 			# return jsonify(math.cos(math.radians(Playground.lat))) 
 			# return jsonify(math.cos(math.radians(Playground.long)))
-			return jsonify(math.radians(loc_longitude))
+			# return jsonify(math.radians(loc_longitude))
 			#  * 6371 <= 100)
 
 			nearbyplaygrounds = Playground.query.filter(math.acos(math.sin(math.radians(loc_latitude)) * math.sin(math.radians(Playground.lat)) + math.cos(math.radians(loc_latitude)) * math.cos(math.radians(Playground.lat)) * math.cos(math.radians(Playground.long) - (math.radians(loc_longitude)))) * 6371 <= 100)
 			result = playgrounds_schema.dump(nearbyplaygrounds)
 
-			return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+			# return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
 
 			return "error"
 		else:
