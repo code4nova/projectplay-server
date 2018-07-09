@@ -27,4 +27,8 @@ Gemfile.lock
 #Ignore generated docs
 doc/app
 
+# virtualenv
+.venv/
+venv/
+
 .DS_Store
