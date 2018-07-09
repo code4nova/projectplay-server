@@ -30,3 +30,8 @@ pip3 freeze > requirements.txt
 python3 app.py
 python3 crud.py
 ```
+
+## Update models from schema
+
+* `pip3 install sqlacodegen`
+  * https://pypi.org/project/sqlacodegen/
