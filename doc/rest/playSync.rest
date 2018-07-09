@@ -1,7 +1,7 @@
 # variables
 ### getAllPlaygrounds
 GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=? HTTP/1.1
-contentType: application/json
+Accept: application/json
 
 ### PlacesApiSearch
 # filter server side by location, not currently being used

@@ -1,6 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, current_app, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask import abort
+import maya
+import json
 import os
 
 app = Flask(__name__)
@@ -29,6 +32,20 @@ class UserSchema(ma.Schema):
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
+@app.before_request
+def detect_user_language():
+    language = request.cookies.get('user_lang')
+    request.start_time = maya.now()
+
+    if language is None:
+        language = "en" # guess_language_from_request()
+    g.language = language
+
+        # when the response exists, set a cookie with the language
+        # @after_this_request
+        # def remember_language(response):
+        #     response.set_cookie('user_lang', language)
+
 
 # endpoint to create new user
 @app.route("/user", methods=["POST"])
@@ -43,13 +60,16 @@ def add_user():
 
     return jsonify(new_user)
 
-# ?callback=??callback=?
+# ?callback=?
 @app.route("/playgrounds.json", methods=["GET"])
-def get_users():
-    all_users = User.query.all()
-    result = users_schema.dump(all_users)
-    return jsonify(result.data)
-
+def get_playgrounds_callback():
+	if request.args.get('callback') == '?':
+		all_users = User.query.all()
+		result = users_schema.dump(all_users)
+		return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+	else:
+		abort(404)
+    
 # endpoint to show all users
 @app.route("/user", methods=["GET"])
 def get_user():
@@ -88,6 +108,14 @@ def user_delete(id):
 
     return user_schema.jsonify(user)
 
+@app.after_request
+def after_request_callback(response):
+    response.headers["X-Frame-Options"] = "SAMEORIGIN"
+    if 'COMMON_POWERED_BY_DISABLED' not in current_app.config:
+        response.headers['X-Powered-By'] = 'novaplays.com'
+    if 'COMMON_PROCESSED_TIME_DISABLED' not in current_app.config:
+        response.headers['X-Processed-Time'] = maya.now().epoch - request.start_time.epoch
+    return response
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
