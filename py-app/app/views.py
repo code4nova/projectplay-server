@@ -47,9 +47,16 @@ def add_user():
 @app.route("/playgrounds.json", methods=["GET"])
 def get_playgrounds_callback():
 	if request.args.get('callback') == '?':
-		all_playgrounds = Playground.query.all()
-		result = playgrounds_schema.dump(all_playgrounds)
-		return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+		if set(['radius', 'lat','long']) <= set(request.args):
+		# if request.args.get('radius', type = int) & request.args.get('lat', type = int) & request.args.get('long', type = int):
+# radius={{dist}}&lat={{lat}}&long={{long}}
+			
+			
+			return "error"
+		else:
+			all_playgrounds = Playground.query.all()
+			result = playgrounds_schema.dump(all_playgrounds)
+			return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
 	else:
 		abort(404)
     

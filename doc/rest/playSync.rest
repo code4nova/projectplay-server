@@ -19,4 +19,8 @@ contentType: application/json
 GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=?radius={{dist}}&lat={{lat}}&long={{long}} HTTP/1.1
 contentType: application/json
 
+### fixed format
+GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=?&radius={{dist}}&lat={{lat}}&long={{long}} HTTP/1.1
+contentType: application/json
+
 #
