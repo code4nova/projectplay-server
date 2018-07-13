@@ -14,24 +14,6 @@ $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
-```bash
-python3
-```
-
-```python
-from crud import db
-db.create_all()
-exit()
-```
-
-```bash
-$ touch /tmp/mydatabase.db
-$ python
->>> from app import db
->>> db.create_all()
->>> quit()
-```
-
 ## Seeder
 
 * `python3 seeder` make sure to rename `id` column to `playid` or something else
