@@ -4,19 +4,17 @@ based off of https://medium.com/python-pandemonium/build-simple-restful-api-with
 
 ## Getting started
 
-```bash
-pip3 install -r requirements.txt
-```
+Using Python3.6
 
 ```
-$ virtualenv venv
+$ python3.6 -m venv venv
 $ source venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
 ## Seeder
 
-* `python3 seeder` make sure to rename `id` column to `playid` or something else
+* `python3 seeder.py` make sure to rename `id` column to `playid` or something else
 
 ## Updating dependencies
 
@@ -29,6 +27,8 @@ pip3 freeze > requirements.txt
 ```bash
 python3 run.py
 ```
+
+Json data is at: `/playgrounds.json?callback=?`
 
 ## Update models from schema
 
