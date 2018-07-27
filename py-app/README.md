@@ -20,6 +20,7 @@ $ pip install -r requirements.txt
 
 ```bash
 pip3 freeze > requirements.txt
+pip install package && pip freeze > requirements.txt
 ```
 
 ## Run app
