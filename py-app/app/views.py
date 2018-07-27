@@ -49,7 +49,7 @@ def get_playgrounds_callback():
 	if request.args.get('callback') == '?':
 		all_playgrounds = Playground.query.all()
 		result = playgrounds_schema.dump(all_playgrounds)
-		return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+		return jsonify(result.data)
 	else:
 		abort(404)
     
@@ -99,3 +99,4 @@ def after_request_callback(response):
     if 'COMMON_PROCESSED_TIME_DISABLED' not in current_app.config:
         response.headers['X-Processed-Time'] = maya.now().epoch - request.start_time.epoch
     return response
+
