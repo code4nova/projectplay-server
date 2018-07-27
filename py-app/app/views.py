@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, current_app, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask import abort
+from flask_cors import cross_origin
 import maya
 import json
 import os
@@ -45,6 +46,7 @@ def add_user():
  ## result = all_playgrounds.dump
 # ?callback=?
 @app.route("/playgrounds.json", methods=["GET"])
+@cross_origin(origins=["http://resttesttest.com","http://localhost:1234"])
 def get_playgrounds_callback():
 	if request.args.get('callback') == '?':
 		all_playgrounds = Playground.query.all()
