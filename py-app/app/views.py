@@ -48,12 +48,12 @@ def add_user():
 @app.route("/playgrounds.json", methods=["GET"])
 @cross_origin(origins=["http://resttesttest.com","http://localhost:1234"])
 def get_playgrounds_callback():
-	if request.args.get('callback') == '?':
-		all_playgrounds = Playground.query.all()
-		result = playgrounds_schema.dump(all_playgrounds)
-		return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
-	else:
-		abort(404)
+    if request.args.get('callback') == 'jQuery110206937342148408805_1533862420182' and request.args.get('_').isdigit():
+        all_playgrounds = Playground.query.all()
+        result = playgrounds_schema.dump(all_playgrounds)
+        return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+    else:
+        abort(404)
     
 # endpoint to show all users
 @app.route("/user", methods=["GET"])
