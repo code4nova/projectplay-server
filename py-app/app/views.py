@@ -33,10 +33,10 @@ def detect_user_language():
 @app.route("/playgrounds.json", methods=["GET"])
 @cross_origin(origins=["http://resttesttest.com","http://localhost:1234"])
 def get_playgrounds_callback():
-	if request.args.get('callback') == '?':
+	if request.args.get('callback')[:6] == 'jQuery' and request.args.get('_').isdigit():
 		all_playgrounds = Playground.query.all()
 		result = playgrounds_schema.dump(all_playgrounds)
-		return "?("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
+		return request.args.get('callback') +"("+json.dumps(result.data)+")", 200, {'content-type': 'application/javascript; charset=utf-8'}
 	else:
 		abort(404)
 

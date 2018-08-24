@@ -1,6 +1,6 @@
 # variables
 ### getAllPlaygrounds
-GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=? HTTP/1.1
+GET {{protocol}}://{{host}}{{port}}/playgrounds.json?callback=jQuery110206937342148408805_1533862420182&_=1533862420183 HTTP/1.1
 Accept: application/json
 
 ### PlacesApiSearch
